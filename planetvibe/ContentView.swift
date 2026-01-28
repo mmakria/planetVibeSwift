@@ -1,21 +1,25 @@
-//
-//  ContentView.swift
-//  planetvibe
-//
-//  Created by Mohamed Makria on 28/01/2026.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            
+            WikiHomeView()
+                .tabItem {
+                    Label("Planètes", systemImage: "graduationcap")
+                }
+            QuizHomeView()
+                .tabItem {
+                    Label("Quiz", systemImage: "square.grid.2x2.fill")
+                }
+            
+           
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
+                }
         }
-        .padding()
     }
 }
 
