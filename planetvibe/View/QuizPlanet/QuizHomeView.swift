@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizHomeView: View {
     var body: some View {
         Text("Quizz Home")
+        
     }
 }
 

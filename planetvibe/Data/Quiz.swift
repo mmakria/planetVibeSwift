@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 
-struct Quiz {
+struct Quiz: Identifiable {
+    var id = UUID()
     var title: String
     var level: Int
     var theme: String

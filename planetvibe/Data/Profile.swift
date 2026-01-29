@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Profile {
+struct Profile : Identifiable {
+    var id = UUID()
     var firstName: String
     var lastName: String
     var adress: String

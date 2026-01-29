@@ -1,10 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    var article: Article
+    
     var body: some View {
         TabView {
             
-            WikiHomeView()
+            WikiHomeView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars))
                 .tabItem {
                     Label("Planètes", systemImage: "graduationcap")
                 }
@@ -24,5 +26,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars))
 }
