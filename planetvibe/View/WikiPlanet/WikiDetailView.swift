@@ -8,21 +8,36 @@
 import SwiftUI
 
 struct WikiDetailView: View {
+    
     var article: Article
     
     var body: some View {
         ZStack{
             Color(.primaryBlue)
                 .ignoresSafeArea()
-            VStack{
+            VStack {
                 Image(article.image)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .shadow(radius: 10)
                 Text(article.title)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                // Date and Place
+                HStack(spacing: 15) {
+                    Label(article.date, systemImage: "calendar")
+                    Label(article.author, systemImage: "person.fill")
+                }
+                
                 Text(article.description)
-                Text(article.category)
-                Text(article.author)
-                    
+              
+       
+                Spacer()
             }
             .foregroundStyle(.white)
+        
 
         }
       

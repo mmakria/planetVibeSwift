@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             
-            WikiHomeView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars))
+            WikiHomeView()
                 .tabItem {
                     Label("Planètes", systemImage: "graduationcap")
                 }

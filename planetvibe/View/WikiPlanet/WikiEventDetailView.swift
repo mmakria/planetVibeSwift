@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WikiEventDetailView: View {
+    
     var event: Event
     
     var body: some View {
@@ -41,7 +42,6 @@ struct WikiEventDetailView: View {
                         ))
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .foregroundColor(.white)
-                      
                     
                     // Date and Place
                     HStack(spacing: 15) {
@@ -50,14 +50,13 @@ struct WikiEventDetailView: View {
                     }
                     .foregroundColor(.white)
                     .font(.subheadline)
-                    
-                    Spacer()
                 }
                 .padding()
             }
         }
     }
 }
+
 
 #Preview {
     WikiEventDetailView(

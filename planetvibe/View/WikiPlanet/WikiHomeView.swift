@@ -9,33 +9,44 @@ import SwiftUI
 
 struct WikiHomeView: View {
     @State var searchText: String = ""
-    var article: Article
+    var isSearching: Bool {
+        !searchText.isEmpty
+    }
     
+    var searchResults: [Article] {
+        if searchText.isEmpty {
+            return articles
+        } else {
+            return articles.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
     
     var body: some View {
         
         NavigationStack{
             
-            ZStack{
+            ZStack(alignment: .top) {
                 Color(.primaryBlue)
                     .ignoresSafeArea()
                 
-                // Vstazck principale
+                
+                // Vstack principale
                 ScrollView(.vertical){
                     VStack{
                         
-                        // SearchBar
-                        TextField("Rechercher...", text: $searchText)
-                            .textFieldStyle(.roundedBorder)
-                            .padding()
-                        
-                        // Article of the week
+                        // ------------ Article of the week ---------------
                         VStack (alignment: .leading) {
                             Text("Article de la semaine")
                                 .font(.title2)
+                                .bold()
+                            
                             Image(.articleWeek)
                             Text("Les plus belles photos de l'espace prises par la Nasa")
+                                .font(.subheadline)
+                                .bold()
                             Text("24 janvier 2026")
+                                .font(.caption)
+                                .foregroundStyle(.gray)
                         }
                         .padding()
                         .background(LinearGradient(
@@ -43,14 +54,16 @@ struct WikiHomeView: View {
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
-                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                         .padding()
                         
-                        
-                        // Solar System events
-                        VStack {
+                        // ------------- Solar System Section ---------------
+                        VStack (alignment: .leading) {
                             Text("Système solaire")
                                 .font(.title2)
+                                .bold()
+                                .padding(.leading)
+                            
                             
                             // Carroussel
                             ScrollView(.horizontal) {
@@ -60,14 +73,19 @@ struct WikiHomeView: View {
                                         if article.category == "Système solaire"{
                                             WikiCardView(article: article)
                                         }
-                                    }}
+                                    }
+                                }
+                                .padding()
                             }
                         }
                         
-                        // Satellite section
-                        VStack {
+                        // -------------- Satellite section -----------------
+                        VStack (alignment: .leading) {
                             Text("Satellite")
                                 .font(.title2)
+                                .bold()
+                                .padding(.leading)
+                            
                             // Carroussel
                             ScrollView(.horizontal) {
                                 
@@ -79,15 +97,16 @@ struct WikiHomeView: View {
                                         }
                                     }
                                 }
+                                .padding()
                             }
                         }
                         
-                        // Events section
+                        //  --------------- Events section ------------
                         VStack(spacing: 12) {
                             Text("Evenements")
+                                .bold()
                                 .font(.title2)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            
                             // Event components
                             ForEach(events){event in
                                 EventCardView(event: event)
@@ -96,9 +115,37 @@ struct WikiHomeView: View {
                         .padding(.horizontal)
                     }
                 }
+                
+                
+                // SearchBar
+                VStack(alignment: .leading, spacing: 12){
+                    if isSearching {
+                        ForEach(searchResults) { article in
+                            NavigationLink {
+                                WikiDetailView(article: article)
+                            } label: {
+                                Text(article.title)
+                                    .padding()
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                }
+                .background(.gray.opacity(0.9) )
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .padding(.horizontal)
+
+                // End searchBar
+                
+                
+            
+                
             }
             .foregroundStyle(.white)
+            .animation(.linear, value: searchResults)
         }
+        .searchable(text: $searchText)
+        
     }
 }
 
@@ -107,5 +154,5 @@ struct WikiHomeView: View {
 
 
 #Preview {
-    WikiHomeView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars))
+    WikiHomeView()
 }

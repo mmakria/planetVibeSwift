@@ -17,14 +17,23 @@ struct WikiCardView : View {
             WikiDetailView(article: article)
             
         } label: {
-            VStack(spacing: 8) {
-                Image(article.image)
-                    .shadow(radius: 3, x: 3, y: 3)
+            ZStack {
+                
                 Text(article.title)
+                    .padding()
+                    .padding(.top, 28)
+                    .frame(width: 120, height: 80)
+                    .bold()
+                    .font(.title3)
+                    .background(.gradientBlue100)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                
+                Image(article.image)
+                    .shadow(radius: 3, x: 6, y: 12)
+                    .offset(y: -38)
             }
-            .padding()
-            .background(.gradientBlue100)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .padding(.top)
+            
         }
     }
 }
