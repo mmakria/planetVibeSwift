@@ -58,7 +58,10 @@ struct WikiCardView : View {
             category: "Solar System",
             date: "28/12/2025",
             author: "Thomas",
-            image: .mars
+            image: .mars,
+            sections: [
+                ArticleSection(title: "Test", content: "Test++content")
+            ]
         )
     )
 }

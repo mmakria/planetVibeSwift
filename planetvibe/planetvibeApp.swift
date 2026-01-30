@@ -11,7 +11,7 @@ import SwiftUI
 struct planetvibeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars))
+            ContentView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars, sections: [ArticleSection(title: "Test", content: "Test")]))
         }
     }
 }
