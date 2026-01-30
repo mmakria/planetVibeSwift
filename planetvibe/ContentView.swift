@@ -15,8 +15,6 @@ struct ContentView: View {
                     Label("Quiz", systemImage: "square.grid.2x2.fill")
                 }
             
-           
-            
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
