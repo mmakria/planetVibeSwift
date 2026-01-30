@@ -11,8 +11,12 @@ struct QuizHomeView: View {
     
     
     var body: some View {
-
+        
         NavigationStack {
+            
+            // =====================
+            // Background
+            // =====================
             
             ZStack {
                 
@@ -35,6 +39,10 @@ struct QuizHomeView: View {
                 }
                 
                 ScrollView {
+                    
+                    // =====================
+                    // NIVEAU 1
+                    // =====================
                     
                     VStack {
                         
@@ -61,170 +69,184 @@ struct QuizHomeView: View {
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 10) {
+                            HStack(spacing: 20) {
                                 ForEach(quizzes){ quiz in
                                     
-                                    NavigationLink {
-                                        QuizQuestionView(quiz: quiz)
-
-                                    } label: {
-                                        
-                                        VStack {
-                                            
-                                            ZStack {
-                                                
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .foregroundStyle(Color.secondaryBlue)
-                                                    .frame(width: 100, height: 100)
-                                                Image(quiz.image)
-                                                    .frame(width: 50, height: 50)
-                                                    .padding(3)
-                                                
-                                            }
-                                            Text(quiz.title)
-                                                .foregroundStyle(Color.white)
-                                                .fontWeight(.bold)
-                                        }
+                                    if quiz.level == 1 {
+                                        QuizCardView(quiz: quiz)
                                     }
                                 }
                             }
                             .padding(.horizontal)
                         } .padding(.bottom, 20)
                         
+                    }
+                    
+                    // =====================
+                    // NIVEAU 2
+                    // =====================
+                    
+                    VStack {
                         
-                        //                            HStack {
-                        //
-                        //                                VStack(alignment: .leading) {
-                        //
-                        //                                    Text("Niveau 2")
-                        //                                        .foregroundStyle(Color.gray)
-                        //                                        .fontWeight(.bold)
-                        //                                        .font(.title2)
-                        //                                        .frame(maxWidth: .infinity, alignment: .leading)
-                        //
-                        //                                    Text("Termine les quizz du niveau 1.")
-                        //                                        .foregroundStyle(Color.gray)
-                        //                                        .fontWeight(.light)
-                        //                                        .font(.title3)
-                        //                                        .frame(maxWidth: .infinity, alignment: .leading)
-                        //
-                        //                                }
-                        //                                .padding(.leading)
-                        //
-                        //                                Image(systemName: "lock")
-                        //                                    .padding()
-                        //                                    .foregroundStyle(Color.gray)
-                        //                            }
-                        //
-                        //                            NavigationLink {
-                        //                                QuizQuestionView()
-                        //
-                        //                            } label: {
-                        //
-                        //                                VStack {
-                        //
-                        //
-                        //                                    ScrollView(.horizontal, showsIndicators: false) {
-                        //
-                        //                                        HStack(spacing: 10) {
-                        //
-                        //                                            ForEach(quizzes){ quiz in
-                        //
-                        //                                                VStack {
-                        //
-                        //                                                    ZStack {
-                        //
-                        //                                                        RoundedRectangle(cornerRadius: 10)
-                        //                                                            .foregroundStyle(Color.gray)
-                        //                                                            .frame(width: 100, height: 100)
-                        //                                                        Image(quiz.image)
-                        //                                                            .frame(width: 50, height: 50)
-                        //                                                            .padding(3)
-                        //                                                            .grayscale(0.99)
-                        //
-                        //                                                    }
-                        //                                                    Text(quiz.title)
-                        //                                                        .foregroundStyle(Color.gray)
-                        //                                                        .fontWeight(.light)
-                        //
-                        //                                                }
-                        //
-                        //                                            }
-                        //
-                        //                                        }
-                        //                                        .padding()
-                        //                                    }
-                        //
-                        //                                }
-                        //
-                        //                            } .padding(.bottom, 20)
-                        //
-                        //                            HStack {
-                        //
-                        //                                VStack(alignment: .leading) {
-                        //
-                        //                                    Text("Niveau 3")
-                        //                                        .foregroundStyle(Color.gray)
-                        //                                        .fontWeight(.bold)
-                        //                                        .font(.title2)
-                        //                                        .frame(maxWidth: .infinity, alignment: .leading)
-                        //
-                        //                                    Text("Termine les quizz du niveau 2.")
-                        //                                        .foregroundStyle(Color.gray)
-                        //                                        .fontWeight(.light)
-                        //                                        .font(.title3)
-                        //                                        .frame(maxWidth: .infinity, alignment: .leading)
-                        //
-                        //                                }
-                        //                                .padding(.leading)
-                        //
-                        //                                Image(systemName: "lock")
-                        //                                    .padding()
-                        //                                    .foregroundStyle(Color.gray)
-                        //                            }
-                        //
-                        //                            NavigationLink {
-                        //                                QuizQuestionView()
-                        //
-                        //                            } label: {
-                        //
-                        //                                VStack {
-                        //
-                        //
-                        //                                    ScrollView(.horizontal, showsIndicators: false) {
-                        //
-                        //                                        HStack(spacing: 10) {
-                        //
-                        //                                            ForEach(quizzes){ quiz in
-                        //
-                        //                                                VStack {
-                        //
-                        //                                                    ZStack {
-                        //
-                        //                                                        RoundedRectangle(cornerRadius: 10)
-                        //                                                            .foregroundStyle(Color.gray)
-                        //                                                            .frame(width: 100, height: 100)
-                        //                                                        Image(quiz.image)
-                        //                                                            .frame(width: 50, height: 50)
-                        //                                                            .padding(3)
-                        //                                                            .grayscale(0.99)
-                        //
-                        //                                                    }
-                        //                                                    Text(quiz.title)
-                        //                                                        .foregroundStyle(Color.gray)
-                        //                                                        .fontWeight(.light)
-                        //
-                        //                                                }
-                        //
-                        //                                            }
-                        //
-                        //                                        }
-                        //                                        .padding()
-                        //                                    }
-                        //
-                        //                                }
-                        //
-                        //                            } .padding(.bottom, 20)
+                        HStack {
+                            
+                            VStack(alignment: .leading) {
+                                
+                                Text("Niveau 2 : ")
+                                    .foregroundStyle(Color.secondaryBlue)
+                                    .fontWeight(.bold)
+                                    .font(.title2)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Text("Observation & exploration")
+                                    .foregroundStyle(Color.white)
+                                    .fontWeight(.light)
+                                    .font(.title3)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                            }
+                            .padding(.leading)
+                            
+                        }
+                        
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(quizzes){ quiz in
+                                    
+                                    if quiz.level == 2 {
+                                        QuizCardView(quiz: quiz)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal)
+                        } .padding(.bottom, 20)
+                        
+                    }
+                    
+                    // =====================
+                    // NIVEAU 3
+                    // =====================
+                    
+                    VStack {
+                        
+                        HStack {
+                            
+                            VStack(alignment: .leading) {
+                                
+                                Text("Niveau 3 : ")
+                                    .foregroundStyle(Color.secondaryBlue)
+                                    .fontWeight(.bold)
+                                    .font(.title2)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Text("Astronomie : Étoiles & galaxies")
+                                    .foregroundStyle(Color.white)
+                                    .fontWeight(.light)
+                                    .font(.title3)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                            }
+                            .padding(.leading)
+                            
+                        }
+                        
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(quizzes){ quiz in
+                                    
+                                    if quiz.level == 3 {
+                                        QuizCardView(quiz: quiz)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal)
+                        } .padding(.bottom, 20)
+                        
+                    }
+                    
+                    // =====================
+                    // NIVEAU 4
+                    // =====================
+                    
+                    VStack {
+                        
+                        HStack {
+                            
+                            VStack(alignment: .leading) {
+                                
+                                Text("Niveau 4 : ")
+                                    .foregroundStyle(Color.secondaryBlue)
+                                    .fontWeight(.bold)
+                                    .font(.title2)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Text("Cosmologie : Idées clés")
+                                    .foregroundStyle(Color.white)
+                                    .fontWeight(.light)
+                                    .font(.title3)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                            }
+                            .padding(.leading)
+                            
+                        }
+                        
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(quizzes){ quiz in
+                                    
+                                    if quiz.level == 4 {
+                                        QuizCardView(quiz: quiz)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal)
+                        } .padding(.bottom, 20)
+                        
+                    }
+                    
+                    // =====================
+                    // NIVEAU 5
+                    // =====================
+                    
+                    VStack {
+                        
+                        HStack {
+                            
+                            VStack(alignment: .leading) {
+                                
+                                Text("Niveau 5 : ")
+                                    .foregroundStyle(Color.secondaryBlue)
+                                    .fontWeight(.bold)
+                                    .font(.title2)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Text("Frontières : Questions modernes")
+                                    .foregroundStyle(Color.white)
+                                    .fontWeight(.light)
+                                    .font(.title3)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                            }
+                            .padding(.leading)
+                            
+                        }
+                        
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                ForEach(quizzes){ quiz in
+                                    
+                                    if quiz.level == 5 {
+                                        QuizCardView(quiz: quiz)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal)
+                        } .padding(.bottom, 20)
                         
                     }
                     
@@ -243,3 +265,5 @@ struct QuizHomeView: View {
 #Preview {
     QuizHomeView()
 }
+
+

@@ -35,8 +35,7 @@ struct WikiDetailView: View {
                     }
                     .font(.footnote)
                     VStack (alignment: .leading) {
-                        
-                        
+                         
                         Text(article.description)
                             .padding()
                             .background(Color.gray.opacity(0.2))
@@ -58,14 +57,7 @@ struct WikiDetailView: View {
                     }}
                 .padding()
                 
-                
-                
             }
-            
-            
-            
-            
-            
         }
     }
 }

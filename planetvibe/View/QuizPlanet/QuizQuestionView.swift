@@ -12,23 +12,18 @@ struct QuizQuestionView: View {
     let quiz: Quiz
     var questions: [Question] { quiz.questions }
     
-    // questions
-   
-    
-    // states
+    @State var score: Int = 0
     @State private var currentQuestionIndex = 0
-    @State private var selectedAnswer: String? = nil
-    @State private var isAnswered = false
-    @State private var animateCorrect = false
+    @State private var selectedAnswerIndex: Int? = nil
     
-    // grid
+    // Grid layout
     let columns = [
         GridItem(.flexible(), spacing: 20),
         GridItem(.flexible(), spacing: 20)
     ]
     
     var body: some View {
-        let currentQuestion = questions[currentQuestionIndex]
+        let question = questions[currentQuestionIndex]
         let progress = Double(currentQuestionIndex + 1) / Double(questions.count)
         
         ZStack {
@@ -36,75 +31,76 @@ struct QuizQuestionView: View {
             
             VStack(spacing: 25) {
                 
-                // progress text
+                // Progress text
                 Text("Question \(currentQuestionIndex + 1) / \(questions.count)")
                     .foregroundColor(.white.opacity(0.8))
                     .font(.headline)
                 
-                //  progress bar
+                // Progress bar
                 ProgressView(value: progress)
-                    .progressViewStyle(LinearProgressViewStyle(tint: .blue))
+                    .tint(.blue)
                     .scaleEffect(x: 1, y: 3)
                     .padding(.horizontal)
-                    .animation(.easeInOut, value: progress)
                 
-                //  question
-                Text(currentQuestion.questionTitle)
+                // Question image
+                Image(question.image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(radius: 10)
+                    .padding(.horizontal)
+                
+                // Question text
+                Text(question.questionTitle)
                     .foregroundColor(.white)
                     .font(.title2.bold())
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
-                    .padding(.top, 10)
                 
-                //  answers grid
+                // Answers grid
                 LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(currentQuestion.propositions, id: \.self) { answer in
+                    ForEach(question.propositions.indices, id: \.self) { index in
+                        let answer = question.propositions[index]
                         
                         Button {
-                            selectedAnswer = answer
-                            isAnswered = true
-                            
-                            if answer == currentQuestion.answer {
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.4)) {
-                                    animateCorrect.toggle()
-                                }
+                            // Only allow selection once
+                            if selectedAnswerIndex == nil {
+                                selectedAnswerIndex = index
                             }
                         } label: {
                             Text(answer)
                                 .font(.title2)
                                 .foregroundColor(.white)
                                 .frame(width: 190, height: 120)
-                                .background(buttonColor(for: answer))
+                                .background(buttonColor(index: index))
                                 .cornerRadius(12)
-                                .scaleEffect(answer == selectedAnswer ? 1.08 : 1.0) // Bounce
-                                .shadow(color: glowColor(for: answer), radius: animateCorrect ? 20 : 0)
-                                .animation(.spring(), value: selectedAnswer)
+                                .scaleEffect(selectedAnswerIndex == index ? 1.05 : 1)
                         }
-                        .disabled(isAnswered)
+                        
                     }
                 }
                 
                 Spacer()
                 
-                // navigation
+                // Navigation buttons
                 HStack(spacing: 40) {
-                    
                     Button {
                         if currentQuestionIndex > 0 {
                             currentQuestionIndex -= 1
-                            resetQuestion()
+                            selectedAnswerIndex = nil
                         }
                     } label: {
-                        navButton(text: "Précédent")
+                        navButton("Précédent")
                     }
                     
                     Button {
                         if currentQuestionIndex < questions.count - 1 {
                             currentQuestionIndex += 1
-                            resetQuestion()
+                            selectedAnswerIndex = nil
                         }
                     } label: {
-                        navButton(text: "Suivant")
+                        navButton("Suivant")
                     }
                 }
                 .padding(.bottom, 30)
@@ -113,37 +109,30 @@ struct QuizQuestionView: View {
         }
     }
     
-    // button colors
-    func buttonColor(for answer: String) -> Color {
-        guard isAnswered else { return .gradientBlue100 }
+    // Determine button color
+    func buttonColor(index: Int) -> Color {
+        guard let selected = selectedAnswerIndex else {
+            return .gradientBlue100
+        }
         
-        if answer == questions[currentQuestionIndex].answer {
-            return .green
+        let question = questions[currentQuestionIndex]
+        let correctIndex = question.propositions.firstIndex(of: question.answer)
+        
+        // Only color the selected answer
+        if index == selected {
+            /* if score == correctIndex {
+             score += 1
+             } */
+            
+            return index == correctIndex ? .green : .red
         }
-        if answer == selectedAnswer {
-            return .red
-        }
+        
+        // Keep unselected answers neutral
         return .gradientBlue100
     }
     
-    // glow effect
-    func glowColor(for answer: String) -> Color {
-        if answer == questions[currentQuestionIndex].answer && isAnswered {
-            return .green
-        }
-        return .clear
-    }
-    
-    // reset
-    func resetQuestion() {
-        selectedAnswer = nil
-        isAnswered = false
-        animateCorrect = false
-    }
-    
-    
-    //  nav button ui
-    func navButton(text: String) -> some View {
+    // Navigation button style
+    func navButton(_ text: String) -> some View {
         Text(text)
             .foregroundColor(.white)
             .frame(width: 140, height: 40)
@@ -154,6 +143,19 @@ struct QuizQuestionView: View {
 
 #Preview {
     QuizQuestionView(
-        quiz: Quiz(title: "Test", level: 1, theme: "Category", image: .articleWeek, questions: spaceQuestions)
+        quiz: Quiz(
+            title: "Planètes telluriques",
+            level: 1,
+            theme: "Système solaire — Bases",
+            image: .mars,
+            questions: [
+                Question(
+                    questionTitle: "Quelle est la planète la plus proche du Soleil ?",
+                    answer: "Mercure",
+                    image: .mercury,
+                    propositions: ["Mercure", "Vénus", "Terre", "Mars"]
+                ),
+            ]
+        )
     )
 }
