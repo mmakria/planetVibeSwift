@@ -21,9 +21,21 @@ struct QuizResultView: View {
                 Text("Résultat")
                     .font(.largeTitle)
                     .bold()
-                Text("Tu as trouvé \(score) réponses sur")
-                Circle()
-                Spacer()
+                HStack{
+                    Text("Tu as trouvé")
+                        .font(.title2)
+                    Text("\(score)/5")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.yellow)
+                    Text("réponses correctes !")
+                        .font(.title3)
+                    
+                }
+                
+                Image(.comic)
+                    .resizable()
+                    .scaledToFit()
+                
                 Text("Tu veux approfondir tes connaissances tu peux jetter un coup d'oeil au chapitre")
                 
                 VStack{
