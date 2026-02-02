@@ -24,7 +24,7 @@ struct EventCardView: View {
                     .frame(width: 60, height: 60)
                     .scaledToFill()
                     .shadow(radius: 3, x: 3, y: 3)
-                    .clipShape(RoundedRectangle(cornerRadius: 18))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 
                 // Text Stack
                 VStack(alignment: .leading, spacing: 4) {
