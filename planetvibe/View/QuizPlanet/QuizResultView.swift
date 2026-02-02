@@ -31,7 +31,6 @@ struct QuizResultView: View {
                         .foregroundColor(.yellow)
                     Text("réponses correctes !")
                         .font(.title3)
-                    
                 }
                 
                 Image(.comic)

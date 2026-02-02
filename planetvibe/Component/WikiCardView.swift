@@ -51,17 +51,5 @@ struct WikiCardView : View {
 //}
 
 #Preview {
-    WikiCardView(
-        article: Article(
-            title: "Mars",
-            description: "Description",
-            category: "Solar System",
-            date: "28/12/2025",
-            author: "Thomas",
-            image: .mars,
-            sections: [
-                ArticleSection(title: "Test", content: "Test++content")
-            ]
-        )
-    )
+    WikiCardView(article: articles[1])
 }

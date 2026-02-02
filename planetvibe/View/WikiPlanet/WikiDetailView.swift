@@ -8,87 +8,179 @@
 import SwiftUI
 
 struct WikiDetailView: View {
-    
+
     var article: Article
-    
+    @State private var appeared = false
+
     var body: some View {
-        ZStack{
+        ZStack {
             Color(.primaryBlue)
                 .ignoresSafeArea()
-            VStack {
-                ScrollView(.vertical){
-                    // Image
-                    Image(article.image)
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .shadow(radius: 10)
-                    // Titre
-                    Text(article.title)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    // Date and Place
-                    HStack(spacing: 15) {
-                        Label(article.date, systemImage: "calendar")
-                        Label(article.author, systemImage: "person.fill")
+
+            ScrollView(.vertical, showsIndicators: false) {
+
+                VStack(alignment: .leading, spacing: 0) {
+
+                    // MARK: - Hero Image
+                    ZStack(alignment: .bottomLeading) {
+                        Image(article.imageFull ?? article.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity, maxHeight: 250)
+
+                        // Gradient overlay
+                        LinearGradient(
+                            colors: [.clear, Color(.primaryBlue)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .frame(height: 120)
+
+                        // Title + category
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(article.category.uppercased())
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(Color(.secondaryBlue))
+
+                            Text(article.title)
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 12)
                     }
-                    .font(.footnote)
-                    VStack (alignment: .leading) {
-                         
-                        Text(article.description)
-                            .padding()
-                            .background(Color.gray.opacity(0.2))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .padding()
-                            .font(.caption)
-                        // Article Section
-                        ForEach(article.sections){ section in
-                            Text("\(section.title)")
+                    .clipShape(
+                        UnevenRoundedRectangle(
+                            bottomLeadingRadius: 24,
+                            bottomTrailingRadius: 24
+                        )
+                    )
+
+                    // MARK: - Key Facts
+                    if !article.keyFacts.isEmpty {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(article.keyFacts) { fact in
+                                    KeyFactCard(fact: fact)
+                                        .scaleEffect(appeared ? 1 : 0.8)
+                                        .opacity(appeared ? 1 : 0)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .padding(.top, 20)
+                    }
+
+                    // MARK: - Sections
+                    ForEach(Array(article.sections.enumerated()), id: \.element.id) { index, section in
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(section.title)
                                 .font(.title2)
                                 .bold()
-                                .padding(.vertical)
-                            Text("\(section.content)")
+                                .foregroundStyle(.white)
+
+                            if let sectionImage = section.image {
+                                Image(sectionImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 180)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+
+                            Text(section.content)
+                                .foregroundStyle(.white.opacity(0.85))
                         }
-                        
-                        .foregroundStyle(.white)
-                        
-                        
-                    }}
-                .padding()
-                
+                        .padding(.horizontal)
+                        .padding(.top, 24)
+                        .opacity(appeared ? 1 : 0)
+                        .offset(y: appeared ? 0 : 16)
+                        .animation(
+                            .easeOut(duration: 0.5).delay(Double(index) * 0.15),
+                            value: appeared
+                        )
+                    }
+
+                    // MARK: - Fun Fact
+                    FunFactCard(text: article.funFact)
+                        .padding(.horizontal)
+                        .padding(.top, 24)
+                        .padding(.bottom, 40)
+                        .opacity(appeared ? 1 : 0)
+                        .offset(y: appeared ? 0 : 12)
+                }
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.6)) {
+                appeared = true
             }
         }
     }
 }
 
-#Preview {
-    WikiDetailView(
-        article: Article(
-            title: "Terre",
-            description: "La Terre est la troisième planète du système solaire et la seule connue pour abriter la vie.",
-            category: "Système solaire",
-            date: "28/12/2026",
-            author: "Thomas GrosJEAN",
-            image: .earth,
-            sections: [
-                ArticleSection(
-                    title: "Position dans le système solaire",
-                    content: "La Terre orbite autour du Soleil en environ 365 jours. Elle se situe dans la zone habitable, une région où les températures permettent la présence d’eau liquide."
-                ),
-                ArticleSection(
-                    title: "Atmosphère et climat",
-                    content: "L’atmosphère terrestre est composée majoritairement d’azote et d’oxygène. Elle protège la surface des radiations solaires et régule la température grâce à l’effet de serre naturel."
-                ),
-                ArticleSection(
-                    title: "Vie sur Terre",
-                    content: "La Terre est la seule planète connue abritant la vie. Des millions d’espèces vivent dans des environnements variés, des océans profonds aux montagnes enneigées."
-                )
-            ]
-            
-        )
-    )
+// MARK: - Key Fact Card
+
+private struct KeyFactCard: View {
+    let fact: KeyFact
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: fact.icon)
+                .font(.title2)
+                .foregroundStyle(Color(.secondaryBlue))
+
+            Text(fact.value)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
+
+            Text(fact.label)
+                .font(.caption)
+                .foregroundStyle(.white.opacity(0.7))
+        }
+        .frame(width: 120, height: 110)
+        .background(Color(.secondaryBlue).opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+    }
 }
 
+// MARK: - Fun Fact Card
 
+private struct FunFactCard: View {
+    let text: String
 
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "lightbulb.fill")
+                .font(.title2)
+                .foregroundStyle(Color(.bulbcolor))
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Le savais-tu ?")
+                    .font(.subheadline)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+
+                Text(text)
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.9))
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.purpleCard))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    NavigationStack {
+        WikiDetailView(article: articles[0])
+    }
+}

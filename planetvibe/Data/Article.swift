@@ -9,22 +9,36 @@ import Foundation
 import SwiftUI
 
 
+struct KeyFact: Identifiable, Equatable {
+    let id = UUID()
+    let icon: String      // SF Symbol name
+    let label: String     // ex: "Diamètre"
+    let value: String     // ex: "12 742 km"
+}
+
 struct Article: Identifiable, Equatable {
     var id = UUID()
     var title: String
-    var description: String
     var category: String
-    var date: String
-    var author: String
     var image: ImageResource
+    var imageFull: ImageResource?
     let sections: [ArticleSection]
+    var keyFacts: [KeyFact]
+    var funFact: String
 }
 
 
-struct ArticleSection: Identifiable, Equatable{
+struct ArticleSection: Identifiable, Equatable {
     let id = UUID()
     let title: String
     let content: String
+    let image: ImageResource?
+
+    init(title: String, content: String, image: ImageResource? = nil) {
+        self.title = title
+        self.content = content
+        self.image = image
+    }
 }
 
 // --------------------------   DATA ARTICLE SECTION ------------------------------------
@@ -33,15 +47,15 @@ struct ArticleSection: Identifiable, Equatable{
 let earthSections: [ArticleSection] = [
     ArticleSection(
         title: "Position dans le système solaire",
-        content: "La Terre orbite autour du Soleil en environ 365 jours. Elle se situe dans la zone habitable, une région où les températures permettent la présence d’eau liquide."
+        content: "La Terre orbite autour du Soleil à une distance moyenne de 150 millions de kilomètres, bouclant une révolution complète en environ 365,25 jours. Elle se situe dans la zone habitable, une région où les températures permettent la présence d'eau liquide à la surface. Cette position idéale, ni trop proche ni trop éloignée du Soleil, est l'un des facteurs clés qui rendent la vie possible. L'inclinaison de son axe à 23,5° est aussi responsable de l'alternance des saisons."
     ),
     ArticleSection(
         title: "Atmosphère et climat",
-        content: "L’atmosphère terrestre est composée majoritairement d’azote et d’oxygène. Elle protège la surface des radiations solaires et régule la température grâce à l’effet de serre naturel."
+        content: "L'atmosphère terrestre est composée à 78 % d'azote et 21 % d'oxygène, avec des traces de vapeur d'eau, de CO₂ et d'autres gaz. Elle agit comme un bouclier protecteur contre les radiations solaires et les micrométéorites. L'effet de serre naturel maintient une température moyenne de 15 °C, sans quoi la planète serait glacée à -18 °C. La couche d'ozone, située entre 20 et 40 km d'altitude, filtre les rayons ultraviolets nocifs pour les êtres vivants."
     ),
     ArticleSection(
         title: "Vie sur Terre",
-        content: "La Terre est la seule planète connue abritant la vie. Des millions d’espèces vivent dans des environnements variés, des océans profonds aux montagnes enneigées."
+        content: "La Terre est la seule planète connue à ce jour abritant la vie, avec une biodiversité estimée à plus de 8 millions d'espèces. Les océans, qui couvrent 71 % de la surface, abritent une faune immense, des récifs coralliens aux fosses abyssales. Sur les continents, la vie s'est adaptée à des environnements extrêmes : déserts brûlants, forêts tropicales, sommets enneigés et régions polaires. Cette diversité repose sur le cycle de l'eau et un équilibre délicat entre atmosphère, géologie et biologie."
     )
 ]
 
@@ -50,15 +64,15 @@ let earthSections: [ArticleSection] = [
 let marsSections: [ArticleSection] = [
     ArticleSection(
         title: "Pourquoi Mars est rouge",
-        content: "La couleur rouge de Mars provient de l’oxyde de fer présent dans son sol. Cette poussière riche en rouille recouvre une grande partie de la surface."
+        content: "La couleur rouge de Mars provient de l'oxyde de fer présent dans son sol. Cette poussière riche en rouille recouvre une grande partie de la surface."
     ),
     ArticleSection(
         title: "Paysages martiens",
-        content: "Mars possède les plus grands volcans et canyons du système solaire, dont Olympus Mons et Valles Marineris, témoignant d’un passé géologique actif."
+        content: "Mars possède les plus grands volcans et canyons du système solaire, dont Olympus Mons et Valles Marineris, témoignant d'un passé géologique actif."
     ),
     ArticleSection(
         title: "Recherche de vie",
-        content: "Les missions robotiques explorent Mars pour trouver des indices d’eau ancienne et de possibles traces de vie microbienne passée."
+        content: "Les missions robotiques explorent Mars pour trouver des indices d'eau ancienne et de possibles traces de vie microbienne passée."
     )
 ]
 
@@ -67,7 +81,7 @@ let marsSections: [ArticleSection] = [
 let jupiterSection: [ArticleSection] = [
     ArticleSection(
         title: "Une géante gazeuse",
-        content: "Jupiter est principalement composée d’hydrogène et d’hélium. Elle ne possède pas de surface solide comme la Terre."
+        content: "Jupiter est principalement composée d'hydrogène et d'hélium. Elle ne possède pas de surface solide comme la Terre."
     ),
     ArticleSection(
         title: "La Grande Tache Rouge",
@@ -84,11 +98,11 @@ let jupiterSection: [ArticleSection] = [
 let neptuneSections: [ArticleSection] = [
     ArticleSection(
         title: "Composition et couleur",
-        content: "Neptune est principalement composée d’hydrogène, d’hélium et de méthane, ce dernier donnant à la planète sa couleur bleue caractéristique."
+        content: "Neptune est principalement composée d'hydrogène, d'hélium et de méthane, ce dernier donnant à la planète sa couleur bleue caractéristique."
     ),
     ArticleSection(
         title: "Vents et tempêtes",
-        content: "Neptune possède certains des vents les plus rapides du système solaire, atteignant jusqu’à 2 100 km/h, ainsi que des tempêtes violentes."
+        content: "Neptune possède certains des vents les plus rapides du système solaire, atteignant jusqu'à 2 100 km/h, ainsi que des tempêtes violentes."
     ),
     ArticleSection(
         title: "Exploration spatiale",
@@ -106,11 +120,11 @@ let mercurySections: [ArticleSection] = [
     ),
     ArticleSection(
         title: "Surface et cratères",
-        content: "La surface de Mercure est couverte de cratères d’impact, semblable à celle de la Lune, témoignant d’une histoire géologique ancienne."
+        content: "La surface de Mercure est couverte de cratères d'impact, semblable à celle de la Lune, témoignant d'une histoire géologique ancienne."
     ),
     ArticleSection(
-        title: "Absence d’atmosphère",
-        content: "Mercure possède une atmosphère très ténue, appelée exosphère, composée principalement d’atomes éjectés de sa surface."
+        title: "Absence d'atmosphère",
+        content: "Mercure possède une atmosphère très ténue, appelée exosphère, composée principalement d'atomes éjectés de sa surface."
     )
 ]
 
@@ -120,15 +134,15 @@ let mercurySections: [ArticleSection] = [
 let hubbleSections: [ArticleSection] = [
     ArticleSection(
         title: "Lancement et mission",
-        content: "Hubble a été lancé en 1990 pour observer l’univers dans des longueurs d’onde visibles, ultraviolettes et infrarouges."
+        content: "Hubble a été lancé en 1990 pour observer l'univers dans des longueurs d'onde visibles, ultraviolettes et infrarouges."
     ),
     ArticleSection(
         title: "Découvertes majeures",
-        content: "Le télescope a permis de nombreuses découvertes, comme la détermination de la vitesse d’expansion de l’univers."
+        content: "Le télescope a permis de nombreuses découvertes, comme la détermination de la vitesse d'expansion de l'univers."
     ),
     ArticleSection(
         title: "Fonctionnement en orbite",
-        content: "Placée en orbite basse, Hubble évite la distorsion atmosphérique, offrant des images d’une netteté exceptionnelle."
+        content: "Placée en orbite basse, Hubble évite la distorsion atmosphérique, offrant des images d'une netteté exceptionnelle."
     )
 ]
 
@@ -141,11 +155,11 @@ let dragonSections: [ArticleSection] = [
     ),
     ArticleSection(
         title: "Caractéristiques techniques",
-        content: "Le vaisseau est réutilisable, équipé de systèmes de sécurité avancés et capable d’amerrir de manière contrôlée."
+        content: "Le vaisseau est réutilisable, équipé de systèmes de sécurité avancés et capable d'amerrir de manière contrôlée."
     ),
     ArticleSection(
         title: "Missions réussies",
-        content: "Depuis son premier vol en 2010, Dragon a effectué de nombreuses missions, renforçant la présence commerciale dans l’espace."
+        content: "Depuis son premier vol en 2010, Dragon a effectué de nombreuses missions, renforçant la présence commerciale dans l'espace."
     )
 ]
 
@@ -158,7 +172,7 @@ let apolloSections: [ArticleSection] = [
     ),
     ArticleSection(
         title: "Les missions lunaires",
-        content: "De 1969 à 1972, six missions Apollo ont permis à douze astronautes d’explorer la surface lunaire."
+        content: "De 1969 à 1972, six missions Apollo ont permis à douze astronautes d'explorer la surface lunaire."
     ),
     ArticleSection(
         title: "Héritage scientifique",
@@ -171,11 +185,11 @@ let apolloSections: [ArticleSection] = [
 let csmSections: [ArticleSection] = [
     ArticleSection(
         title: "Fonction du CSM",
-        content: "Le CSM servait de module principal pour le voyage vers la Lune, abritant l’équipage et les systèmes de support."
+        content: "Le CSM servait de module principal pour le voyage vers la Lune, abritant l'équipage et les systèmes de support."
     ),
     ArticleSection(
         title: "Conception et composants",
-        content: "Il comprenait le module de commande pour l’équipage et le module de service contenant propulsion et énergie."
+        content: "Il comprenait le module de commande pour l'équipage et le module de service contenant propulsion et énergie."
     ),
     ArticleSection(
         title: "Rôle dans les missions Apollo",
@@ -189,86 +203,132 @@ var articles: [Article] = [
     // Earth Article
     Article(
         title: "Terre",
-        description: "La Terre est la troisième planète du système solaire et la seule connue pour abriter la vie.",
         category: "Système solaire",
-        date: "28/12/2026",
-        author: "Thomas GrosJEAN",
         image: .earth,
-        sections: earthSections
+        imageFull: .earthFull,
+        sections: earthSections,
+        keyFacts: [
+            KeyFact(icon: "circle.circle", label: "Diamètre", value: "12 742 km"),
+            KeyFact(icon: "thermometer.medium", label: "Température moy.", value: "15 °C"),
+            KeyFact(icon: "sun.max.fill", label: "Distance au Soleil", value: "150 M km"),
+            KeyFact(icon: "clock.fill", label: "Jour", value: "24 h")
+        ],
+        funFact: "La Terre est la seule planète du système solaire à ne pas porter le nom d'un dieu grec ou romain !"
     ),
     // Mars Article
     Article(
         title: "Mars",
-        description: "Mars est connue comme la planète rouge, avec des volcans géants et des vallées profondes.",
         category: "Système solaire",
-        date: "28/12/2026",
-        author: "Thomas GrosJEAN",
         image: .mars,
-        sections: marsSections
+        imageFull: .marsFull,
+        sections: marsSections,
+        keyFacts: [
+            KeyFact(icon: "circle.circle", label: "Diamètre", value: "6 779 km"),
+            KeyFact(icon: "thermometer.snowflake", label: "Température moy.", value: "-63 °C"),
+            KeyFact(icon: "mountain.2.fill", label: "Plus haut sommet", value: "21 km"),
+            KeyFact(icon: "clock.fill", label: "Jour", value: "24 h 37 min")
+        ],
+        funFact: "Olympus Mons sur Mars est le plus grand volcan du système solaire — presque 3 fois la hauteur de l'Everest !"
     ),
     // Jupiter Article
     Article(
         title: "Jupiter",
-        description: "Jupiter est la plus grande planète du système solaire et possède une grande tache rouge.",
         category: "Système solaire",
-        date: "28/12/2026",
-        author: "Thomas GrosJEAN",
         image: .jupiter,
-        sections:jupiterSection
+        imageFull: .jupiterFull,
+        sections: jupiterSection,
+        keyFacts: [
+            KeyFact(icon: "circle.circle", label: "Diamètre", value: "139 820 km"),
+            KeyFact(icon: "moon.fill", label: "Lunes connues", value: "95"),
+            KeyFact(icon: "wind", label: "Vents max", value: "620 km/h"),
+            KeyFact(icon: "clock.fill", label: "Jour", value: "9 h 56 min")
+        ],
+        funFact: "La Grande Tache Rouge de Jupiter est une tempête qui fait rage depuis plus de 350 ans et qui pourrait contenir 2 Terres !"
     ),
     Article(
         title: "Neptune",
-        description: "Neptune est une planète géante gazeuse bleue, connue pour ses vents violents.",
         category: "Système solaire",
-        date: "28/12/2026",
-        author: "Thomas GrosJEAN",
         image: .neptune,
-        sections: neptuneSections
+        imageFull: .neptuneFull,
+        sections: neptuneSections,
+        keyFacts: [
+            KeyFact(icon: "circle.circle", label: "Diamètre", value: "49 528 km"),
+            KeyFact(icon: "wind", label: "Vents max", value: "2 100 km/h"),
+            KeyFact(icon: "sun.max.fill", label: "Distance au Soleil", value: "4,5 Mrd km"),
+            KeyFact(icon: "clock.fill", label: "Année", value: "165 ans")
+        ],
+        funFact: "Neptune a les vents les plus rapides du système solaire — plus de 2 000 km/h, soit 6 fois plus vite qu'un ouragan sur Terre !"
     ),
     Article(
         title: "Mercure",
-        description: "Mercure est la plus proche du Soleil, avec des températures extrêmes et pas d’atmosphère significative.",
         category: "Système solaire",
-        date: "28/12/2026",
-        author: "Thomas GrosJEAN",
         image: .mercury,
-        sections: mercurySections
+        imageFull: .mercuryFull,
+        sections: mercurySections,
+        keyFacts: [
+            KeyFact(icon: "circle.circle", label: "Diamètre", value: "4 880 km"),
+            KeyFact(icon: "thermometer.sun.fill", label: "Temp. max", value: "430 °C"),
+            KeyFact(icon: "thermometer.snowflake", label: "Temp. min", value: "-180 °C"),
+            KeyFact(icon: "clock.fill", label: "Jour", value: "59 jours")
+        ],
+        funFact: "Un jour sur Mercure dure 59 jours terrestres, mais son année ne fait que 88 jours — un jour y dure presque une année !"
     ),
-    
+
     // Satellites / engins spatiaux
     Article(
         title: "Hubble",
-        description: "Le télescope spatial Hubble observe l’univers depuis l’orbite terrestre depuis 1990.",
         category: "Satellite",
-        date: "24/04/1990",
-        author: "NASA",
         image: .hubble,
-        sections: hubbleSections
+        imageFull: .hubbleFull,
+        sections: hubbleSections,
+        keyFacts: [
+            KeyFact(icon: "scope", label: "Miroir", value: "2,4 m"),
+            KeyFact(icon: "arrow.up.and.down", label: "Altitude", value: "547 km"),
+            KeyFact(icon: "scalemass.fill", label: "Masse", value: "11 110 kg"),
+            KeyFact(icon: "calendar", label: "En service", value: "Depuis 1990")
+        ],
+        funFact: "Hubble fait le tour de la Terre en seulement 97 minutes et a pris plus de 1,5 million de photos de l'univers !"
     ),
     Article(
         title: "Dragon",
-        description: "Dragon est un vaisseau spatial développé par SpaceX pour transporter des astronautes et du fret.",
         category: "Satellite",
-        date: "08/12/2010",
-        author: "SpaceX",
         image: .dragon,
-        sections: dragonSections
+        imageFull: .dragonFull,
+        sections: dragonSections,
+        keyFacts: [
+            KeyFact(icon: "person.3.fill", label: "Équipage max", value: "7 personnes"),
+            KeyFact(icon: "shippingbox.fill", label: "Cargo", value: "6 000 kg"),
+            KeyFact(icon: "arrow.counterclockwise", label: "Réutilisable", value: "Oui"),
+            KeyFact(icon: "flame.fill", label: "Propulseurs", value: "16 Draco")
+        ],
+        funFact: "Le nom Dragon vient de la chanson 'Puff, the Magic Dragon' — Elon Musk a choisi ce nom car les critiques disaient que SpaceX était un rêve impossible !"
     ),
     Article(
         title: "Apollo",
-        description: "Apollo est le programme spatial américain qui a permis à l’homme de marcher sur la Lune.",
         category: "Satellite",
-        date: "29/07/1961",
-        author: "NASA",
         image: .apolloCsm,
-        sections: apolloSections
+        imageFull: .apolloCsmFull,
+        sections: apolloSections,
+        keyFacts: [
+            KeyFact(icon: "person.2.fill", label: "Astronautes sur la Lune", value: "12"),
+            KeyFact(icon: "number", label: "Missions habitées", value: "11"),
+            KeyFact(icon: "calendar", label: "Premier alunissage", value: "1969"),
+            KeyFact(icon: "moon.fill", label: "Échantillons lunaires", value: "382 kg")
+        ],
+        funFact: "L'ordinateur de bord d'Apollo 11 avait moins de puissance qu'une calculatrice de poche actuelle — et il a quand même envoyé des hommes sur la Lune !"
     ),
     Article(
         title: "CSM",
-        description: "Le Command/Service Module (CSM) faisait partie du vaisseau spatial Apollo pour le transport des astronautes.",
         category: "Satellite",
-        date: "26/02/1966",
-        author: "NASA",
         image: .apolloCsm,
-        sections: csmSections
-    )]
+        imageFull: .apolloCsmFull,
+        sections: csmSections,
+        keyFacts: [
+            KeyFact(icon: "person.3.fill", label: "Équipage", value: "3 astronautes"),
+            KeyFact(icon: "scalemass.fill", label: "Masse totale", value: "30 332 kg"),
+            KeyFact(icon: "arrow.up.forward", label: "Vitesse de rentrée", value: "40 000 km/h"),
+            KeyFact(icon: "shield.fill", label: "Bouclier thermique", value: "2 700 °C")
+        ],
+        funFact: "Le bouclier thermique du CSM devait résister à 2 700 °C lors de la rentrée dans l'atmosphère — plus chaud que de la lave en fusion !"
+    )
+]
