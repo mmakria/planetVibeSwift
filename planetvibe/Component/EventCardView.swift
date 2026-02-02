@@ -27,15 +27,24 @@ struct EventCardView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 18))
                 
                 // Text Stack
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 4) {
                     // Date
                     Text(event.date)
                         .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.white.opacity(0.7))
                     // Titre
                     Text(event.title)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
                     // Description
                     Text(event.description)
                         .font(.caption)
+                        .foregroundStyle(.white.opacity(0.7))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
                 }
                 Spacer()
             }
