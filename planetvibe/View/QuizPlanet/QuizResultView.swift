@@ -9,7 +9,10 @@ import SwiftUI
 
 struct QuizResultView: View {
     var score: Int
-    
+    var quiz: Quiz
+    @EnvironmentObject var progress: QuizProgressStore
+    @Environment(\.dismiss) private var dismiss
+
     
     
     var body: some View {
@@ -43,7 +46,9 @@ struct QuizResultView: View {
                     // Navigation to WikiDetail
                     
                     NavigationLink {
-                        //TODO: Envoyer vers un chapitre du quizz
+                        if let article = articles.first(where: { $0.image == quiz.image }) {
+                            WikiDetailView(article: article)
+                        }
                     } label: {
                         Text("Revoir le chapitre")
                             .foregroundColor(.white)
@@ -56,7 +61,7 @@ struct QuizResultView: View {
                     
                     // Navigation to HomeQuiz
                     Button {
-                        // Test
+                        dismiss()
                     } label: {
                         Text("Retourner à l'accueil Quiz")
                             .foregroundColor(.gradientBlue200)
@@ -66,20 +71,18 @@ struct QuizResultView: View {
                             .background(.white)
                             .cornerRadius(8)
                     }
-                    
                 }
-                
-                
-                
             }
             .padding()
-            
-            
-            
         }
     }
 }
 
+
+
 #Preview {
-    QuizResultView(score: 0)
+    NavigationStack {
+        QuizResultView(score: 3, quiz: quizzes[0])
+            .environmentObject(QuizProgressStore(quizzes: quizzes))
+    }
 }

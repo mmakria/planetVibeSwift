@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct planetvibeApp: App {
+    
+    @StateObject private var progress = QuizProgressStore(quizzes: quizzes)
+    
     var body: some Scene {
         WindowGroup {
             ContentView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars, sections: [ArticleSection(title: "Test", content: "Test")]))
+                .environmentObject(progress)
+                .preferredColorScheme(.dark)
         }
     }
 }

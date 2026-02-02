@@ -36,7 +36,7 @@ struct WikiHomeView: View {
                         
                         // ------------ Article of the week ---------------
                         VStack (alignment: .leading) {
-                            Text("Article de la semaine")
+                            Text("Article du jour")
                                 .font(.title2)
                                 .bold()
                             

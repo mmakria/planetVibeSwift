@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var article: Article
+    @EnvironmentObject var progress: QuizProgressStore
     
     var body: some View {
         TabView {
@@ -25,5 +27,7 @@ struct ContentView: View {
 
 #Preview {
     ContentView(article: Article(title: "Mars", description: "Description", category: "Solar System", date: "28/12/2025", author: "Thomas", image: .mars, sections: [ArticleSection(title: "Test", content: "Test")]))
+        .environmentObject(QuizProgressStore(quizzes: quizzes))
 }
+
 

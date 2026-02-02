@@ -9,8 +9,20 @@ import SwiftUI
 
 struct QuizHomeView: View {
     
+    @EnvironmentObject var progress: QuizProgressStore
     
     var body: some View {
+        
+        let level1Quizzes = quizzes.filter { $0.level == 1 }
+        let level2Quizzes = quizzes.filter { $0.level == 2 }
+        let level3Quizzes = quizzes.filter { $0.level == 3 }
+        let level4Quizzes = quizzes.filter { $0.level == 4 }
+        let level5Quizzes = quizzes.filter { $0.level == 5 }
+        
+        let level2Locked = !progress.isLevelUnlocked(2, quizzes: quizzes)
+        let level3Locked = !progress.isLevelUnlocked(3, quizzes: quizzes)
+        let level4Locked = !progress.isLevelUnlocked(4, quizzes: quizzes)
+        let level5Locked = !progress.isLevelUnlocked(5, quizzes: quizzes)
         
         NavigationStack {
             
@@ -70,12 +82,19 @@ struct QuizHomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                ForEach(quizzes){ quiz in
-                                    
-                                    if quiz.level == 1 {
-                                        QuizCardView(quiz: quiz)
-                                    }
+                                
+                                ForEach(level1Quizzes){ quiz in
+                                    QuizCardView(quiz: quiz)
+                                        .overlay(alignment: .topTrailing) {
+                                            if progress.isCompleted(quiz) {
+                                                Image(systemName: "checkmark.circle.fill")
+                                                    .foregroundStyle(.white)
+                                                    .padding(6)
+                                            }
+                                            
+                                        }
                                 }
+                                
                             }
                             .padding(.horizontal)
                         } .padding(.bottom, 20)
@@ -83,7 +102,7 @@ struct QuizHomeView: View {
                     }
                     
                     // =====================
-                    // NIVEAU 2
+                    // NIVEAU 2 (verrouillé tant que niveau 1 pas terminé)
                     // =====================
                     
                     VStack {
@@ -107,16 +126,23 @@ struct QuizHomeView: View {
                             }
                             .padding(.leading)
                             
+                            if level2Locked {
+                                Image(systemName: "lock")
+                                    .padding(.trailing)
+                                    .foregroundStyle(Color.gray)
+                            }
+                            
                         }
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                ForEach(quizzes){ quiz in
+                                ForEach(level2Quizzes){ quiz in
+                                    QuizCardView(quiz: quiz)
+                                        .grayscale(level2Locked ? 1.0 : 0.0)
+                                        .opacity(level2Locked ? 0.6 : 1.0)
+                                        .allowsHitTesting(!level2Locked)
                                     
-                                    if quiz.level == 2 {
-                                        QuizCardView(quiz: quiz)
-                                    }
                                 }
                             }
                             .padding(.horizontal)
@@ -149,18 +175,25 @@ struct QuizHomeView: View {
                             }
                             .padding(.leading)
                             
+                            if level3Locked {
+                                Image(systemName: "lock")
+                                    .padding(.trailing)
+                                    .foregroundStyle(Color.gray)
+                            }
+                            
                         }
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                ForEach(quizzes){ quiz in
-                                    
-                                    if quiz.level == 3 {
-                                        QuizCardView(quiz: quiz)
-                                    }
+                                ForEach(level3Quizzes){ quiz in
+                                    QuizCardView(quiz: quiz)
+                                        .grayscale(level3Locked ? 1.0 : 0.0)
+                                        .opacity(level3Locked ? 0.6 : 1.0)
+                                        .allowsHitTesting(!level3Locked)
                                 }
                             }
+                            
                             .padding(.horizontal)
                         } .padding(.bottom, 20)
                         
@@ -191,16 +224,22 @@ struct QuizHomeView: View {
                             }
                             .padding(.leading)
                             
+                            if level4Locked {
+                                Image(systemName: "lock")
+                                    .padding(.trailing)
+                                    .foregroundStyle(Color.gray)
+                            }
+                            
                         }
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                ForEach(quizzes){ quiz in
-                                    
-                                    if quiz.level == 4 {
-                                        QuizCardView(quiz: quiz)
-                                    }
+                                ForEach(level4Quizzes){ quiz in
+                                    QuizCardView(quiz: quiz)
+                                        .grayscale(level4Locked ? 1.0 : 0.0)
+                                        .opacity(level4Locked ? 0.6 : 1.0)
+                                        .allowsHitTesting(!level4Locked)
                                 }
                             }
                             .padding(.horizontal)
@@ -233,16 +272,22 @@ struct QuizHomeView: View {
                             }
                             .padding(.leading)
                             
+                            if level5Locked {
+                                Image(systemName: "lock")
+                                    .padding(.trailing)
+                                    .foregroundStyle(Color.gray)
+                            }
+                            
                         }
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                ForEach(quizzes){ quiz in
-                                    
-                                    if quiz.level == 5 {
-                                        QuizCardView(quiz: quiz)
-                                    }
+                                ForEach(level5Quizzes){ quiz in
+                                    QuizCardView(quiz: quiz)
+                                        .grayscale(level5Locked ? 1.0 : 0.0)
+                                        .opacity(level5Locked ? 0.6 : 1.0)
+                                        .allowsHitTesting(!level5Locked)
                                 }
                             }
                             .padding(.horizontal)
@@ -264,6 +309,5 @@ struct QuizHomeView: View {
 
 #Preview {
     QuizHomeView()
+        .environmentObject(QuizProgressStore(quizzes: quizzes))
 }
-
-
