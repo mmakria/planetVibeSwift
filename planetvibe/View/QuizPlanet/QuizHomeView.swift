@@ -102,7 +102,7 @@ struct QuizHomeView: View {
                     }
                     
                     // =====================
-                    // NIVEAU 2 (verrouillé tant que niveau 1 pas terminé)
+                    // NIVEAU 2 (verrouillé tant que le quizz 4 n'est pas fait)
                     // =====================
                     
                     VStack {

@@ -20,12 +20,19 @@ struct QuizQuestionView: View {
     // Score
     @State private var score: Int = 0
     @State private var showResult = false
+    @State private var returnToHome = false
+    @Environment(\.dismiss) private var dismiss
     
     // Grid layout
     let columns = [
         GridItem(.flexible(), spacing: 20),
         GridItem(.flexible(), spacing: 20)
     ]
+    
+    // Check if current question is answered
+    var hasAnsweredCurrentQuestion: Bool {
+        selectedAnswers[currentQuestionIndex] != nil
+    }
     
     var body: some View {
         
@@ -35,21 +42,12 @@ struct QuizQuestionView: View {
         ZStack {
             Color.primaryBlue.ignoresSafeArea()
             
-            
-            VStack(spacing: 25) {
-                
-                /* Image("skyplanet")
-                 .resizable()
-                 .scaledToFill()
-                 .frame(height: 00)
-                 .ignoresSafeArea(edges: .top) */
-                
+            VStack(spacing: 20) {
                 
                 // Progress text
                 Text("Question \(currentQuestionIndex + 1) / \(questions.count)")
                     .foregroundColor(.white.opacity(0.9))
                     .font(.headline)
-                
                 
                 // Progress bar
                 ProgressView(value: progress)
@@ -57,14 +55,19 @@ struct QuizQuestionView: View {
                     .scaleEffect(x: 1, y: 3)
                     .padding(.horizontal)
                 
-                // Question image
-                Image(question.image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 150)
-                //.clipShape(RoundedRectangle(cornerRadius: 16))
-                //.shadow(radius: 10)
-                //.padding(.horizontal)
+                ZStack {
+                    Image("skyNew")
+                        .resizable()
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    // Question image
+                    Image(question.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 110)
+                        .padding(.top, 80)
+                }
                 
                 // Question text
                 Text(question.questionTitle)
@@ -84,24 +87,20 @@ struct QuizQuestionView: View {
                             Text(answer)
                                 .font(.title2)
                                 .foregroundColor(.white)
-                                .frame(width: 190, height: 120)
+                                .frame(width: 190, height: 100)
                                 .background(buttonColor(index: index))
                                 .cornerRadius(12)
                                 .scaleEffect(selectedAnswers[currentQuestionIndex] == index ? 1.05 : 1)
                         }
-                        .disabled(selectedAnswers[currentQuestionIndex] != nil) // lock after answer
+                        .disabled(selectedAnswers[currentQuestionIndex] != nil)
                     }
                 }
                 
                 Spacer()
                 
-                // Score display
-                Text("Score: \(score) / \(questions.count)")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                
                 // Navigation buttons
                 HStack(spacing: 5) {
+                    
                     Button {
                         if currentQuestionIndex > 0 {
                             currentQuestionIndex -= 1
@@ -109,10 +108,10 @@ struct QuizQuestionView: View {
                     } label: {
                         navButton("Précédent")
                     }
+                    
                     Image(systemName: "lightbulb.circle.fill")
                         .font(.system(size: 45, weight: .semibold))
                         .foregroundColor(.bulbcolor)
-                    
                     
                     Button {
                         if currentQuestionIndex < questions.count - 1 {
@@ -122,20 +121,25 @@ struct QuizQuestionView: View {
                         }
                     } label: {
                         navButton("Suivant")
+                            .opacity(hasAnsweredCurrentQuestion ? 1 : 0.5)
                     }
+                    .disabled(!hasAnsweredCurrentQuestion)  //answer before continue
                 }
                 .padding(.bottom, 30)
             }
-            .padding(.top, 50)
             .navigationDestination(isPresented: $showResult) {
-                QuizResultView(score: score, quiz: quiz)
+                QuizResultView(score: score, quiz: quiz, returnToHome: $returnToHome)
+            }
+            .onChange(of: returnToHome) {
+                if returnToHome {
+                    dismiss()
+                }
             }
         }
         .toolbar(.hidden, for: .tabBar)
     }
-        
     
-    // selected answer and score
+    // Selected answer and score
     func selectAnswer(_ index: Int) {
         guard selectedAnswers[currentQuestionIndex] == nil else { return }
         
@@ -149,7 +153,7 @@ struct QuizQuestionView: View {
         }
     }
     
-    // button color logic
+    // Button color logic
     func buttonColor(index: Int) -> Color {
         guard let selected = selectedAnswers[currentQuestionIndex] else {
             return .gradientBlue100
@@ -188,8 +192,7 @@ struct QuizQuestionView: View {
                     answer: "Mercure",
                     image: .mercury,
                     propositions: ["Mercure", "Vénus", "Terre", "Mars"]
-                ),
-                
+                )
             ]
         )
     )

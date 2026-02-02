@@ -10,11 +10,10 @@ import SwiftUI
 struct QuizResultView: View {
     var score: Int
     var quiz: Quiz
+    @Binding var returnToHome: Bool
     @EnvironmentObject var progress: QuizProgressStore
     @Environment(\.dismiss) private var dismiss
 
-    
-    
     var body: some View {
         ZStack (alignment: .center) {
             Color(.primaryBlue)
@@ -61,6 +60,8 @@ struct QuizResultView: View {
                     
                     // Navigation to HomeQuiz
                     Button {
+                        progress.markCompleted(quiz)
+                        returnToHome = true
                         dismiss()
                     } label: {
                         Text("Retourner à l'accueil Quiz")
@@ -82,7 +83,7 @@ struct QuizResultView: View {
 
 #Preview {
     NavigationStack {
-        QuizResultView(score: 3, quiz: quizzes[0])
+        QuizResultView(score: 3, quiz: quizzes[0], returnToHome: .constant(false))
             .environmentObject(QuizProgressStore(quizzes: quizzes))
     }
 }

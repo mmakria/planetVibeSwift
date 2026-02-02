@@ -15,11 +15,11 @@ final class QuizProgressStore: ObservableObject {
     @Published private(set) var completedQuizIDs: Set<UUID> = []
     
     // Initialise le store avec une progression "fake":
-    // on marque tous les 3 premiers quiz du niveau 1 comme terminés, pas le 4e (pour la démo).
+    // Marque tous les 3 premiers quiz du niveau 1 comme terminés, pas le 4e (pour la démo).
     init(quizzes: [Quiz]) {
         let level1 = quizzes.filter { $0.level == 1 }
         
-        // On en pré-valide 3/4 pour la démo.
+        // Pré-valide les quizz 1, 2 et 3 pour la démo.
         let precompleted = level1.dropLast().map { $0.id }
         self.completedQuizIDs = Set(precompleted)
     }
@@ -32,10 +32,13 @@ final class QuizProgressStore: ObservableObject {
         completedQuizIDs.insert(quiz.id)
     }
     
-    // Le niveau 1 est toujours accessible.
-    // Le niveau 2 est accessible seulement si tous les quiz niveau 1 sont terminés.
+    // Débloque le 2 après avoir finir le 4e quizz du niveau 1, sans débloquer les autres niveaux
     func isLevelUnlocked(_ level: Int, quizzes: [Quiz]) -> Bool {
-        if level <= 1 { return true }
+        if level <= 1 {
+            return true
+        } else if level >= 3 {
+            return false
+        }
         
         // Règle : tout est bloqué tant que le niveau 1 n'est pas terminé.
         let level1 = quizzes.filter { $0.level == 1 }
