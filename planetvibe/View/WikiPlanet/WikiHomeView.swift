@@ -34,28 +34,34 @@ struct WikiHomeView: View {
                 ScrollView(.vertical){
                     VStack{
                         
-                        // ------------ Article of the week ---------------
-                        VStack (alignment: .leading) {
-                            Text("Article du jour")
-                                .font(.title2)
-                                .bold()
-                            
-                            Image(.articleWeek)
-                            Text("Les plus belles photos de l'espace prises par la Nasa")
-                                .font(.subheadline)
-                                .bold()
-                            Text("24 janvier 2026")
-                                .font(.caption)
-                                .foregroundStyle(.gray)
+                        // ------------ Article du jour ---------------
+                        let articleDuJour = articles[0]
+                        NavigationLink {
+                            WikiDetailView(article: articleDuJour)
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text("Article du jour")
+                                    .font(.title2)
+                                    .bold()
+
+                                Image(.articleWeek)
+
+                                Text("Les plus belles photos de l'espace prises par la Nasa")
+                                    .font(.subheadline)
+                                    .bold()
+                                Text("24 janvier 2026")
+                                    .font(.caption)
+                                    .foregroundStyle(.gray)
+                            }
+                            .padding()
+                            .background(LinearGradient(
+                                gradient: Gradient(colors: [.gradientBlue100, .gradientBlue200]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding()
                         }
-                        .padding()
-                        .background(LinearGradient(
-                            gradient: Gradient(colors: [.gradientBlue100, .gradientBlue200]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .padding()
                         
                         // ------------- Solar System Section ---------------
                         VStack (alignment: .leading) {
@@ -145,6 +151,7 @@ struct WikiHomeView: View {
             .animation(.linear, value: searchResults)
         }
         .searchable(text: $searchText)
+        .toolbarBackground(.hidden, for: .navigationBar)
         
     }
 }

@@ -34,592 +34,169 @@ struct Quiz: Identifiable {
 // =====================
 
 let l1_planetesTelluriques: [Question] = [
-    Question(
-        questionTitle: "Quelles planètes sont dites « telluriques » ?",
-        answer: "Mercure, Vénus, Terre, Mars",
-        image: .mercury,
-        propositions: [
-            "Mercure, Vénus, Terre, Mars",
-            "Jupiter, Saturne, Uranus, Neptune",
-            "Terre, Jupiter, Saturne, Mars",
-            "Vénus, Saturne, Uranus, Mercure"
-        ]
-    ),
-    Question(
-        questionTitle: "Quelle est la planète la plus proche du Soleil ?",
-        answer: "Mercure",
-        image: .mercury,
-        propositions: ["Mercure", "Vénus", "Terre", "Mars"]
-    ),
-    Question(
-        questionTitle: "Quelle planète a une atmosphère très riche en dioxyde de carbone et extrêmement chaude ?",
-        answer: "Vénus",
-        image: .venus,
-        propositions: ["Vénus", "Mars", "Mercure", "Neptune"]
-    ),
-    Question(
-        questionTitle: "Quelle planète possède une grande quantité d’eau liquide à sa surface ?",
-        answer: "Terre",
-        image: .earth,
-        propositions: ["Terre", "Mars", "Vénus", "Mercure"]
-    ),
-    Question(
-        questionTitle: "Quelle planète est surnommée « la planète rouge » ?",
-        answer: "Mars",
-        image: .mars,
-        propositions: ["Mars", "Vénus", "Mercure", "Saturne"]
-    )
+    Question(questionTitle: "Quelles planètes sont dites « telluriques » ?", answer: "Mercure, Vénus, Terre, Mars", image: .mercury, propositions: ["Mercure, Vénus, Terre, Mars","Jupiter, Saturne, Uranus, Neptune","Terre, Jupiter, Saturne, Mars","Vénus, Saturne, Uranus, Mercure"]),
+    Question(questionTitle: "Quelle est la planète la plus proche du Soleil ?", answer: "Mercure", image: .mercury, propositions: ["Mercure", "Vénus", "Terre", "Mars"]),
+    Question(questionTitle: "Quelle planète a une atmosphère très riche en dioxyde de carbone et extrêmement chaude ?", answer: "Vénus", image: .venus, propositions: ["Vénus", "Mars", "Mercure", "Neptune"]),
+    Question(questionTitle: "Quelle planète possède une grande quantité d’eau liquide à sa surface ?", answer: "Terre", image: .earth, propositions: ["Terre", "Mars", "Vénus", "Mercure"]),
+    Question(questionTitle: "Quelle planète est surnommée « la planète rouge » ?", answer: "Mars", image: .mars, propositions: ["Mars", "Vénus", "Mercure", "Saturne"]),
+    Question(questionTitle: "Quelle planète tellurique a le plus de volcans actifs ?", answer: "Terre", image: .earth, propositions: ["Terre", "Mars", "Vénus", "Mercure"]),
+    Question(questionTitle: "Quelle planète tellurique est la plus dense ?", answer: "Terre", image: .earth, propositions: ["Terre", "Mercure", "Mars", "Vénus"]),
+    Question(questionTitle: "Quelle planète tellurique est la plus chaude à sa surface ?", answer: "Vénus", image: .venus, propositions: ["Vénus", "Mercure", "Mars", "Terre"]),
+    Question(questionTitle: "Quelle planète tellurique a le plus grand nombre de lunes ?", answer: "Mars", image: .mars, propositions: ["Mars", "Terre", "Vénus", "Mercure"]),
+    Question(questionTitle: "Quelle planète tellurique a un champ magnétique significatif ?", answer: "Terre", image: .earth, propositions: ["Terre", "Mercure", "Mars", "Vénus"])
 ]
 
 let l1_ordresEtTailles: [Question] = [
-    Question(
-        questionTitle: "Combien y a-t-il de planètes dans le système solaire ?",
-        answer: "8",
-        image: .earth,
-        propositions: ["7", "8", "9", "10"]
-    ),
-    Question(
-        questionTitle: "Quelle est la plus grande planète du système solaire ?",
-        answer: "Jupiter",
-        image: .jupiter,
-        propositions: ["Mars", "Jupiter", "Saturne", "Terre"]
-    ),
-    Question(
-        questionTitle: "Quel est l’ordre correct des quatre premières planètes depuis le Soleil ?",
-        answer: "Mercure, Vénus, Terre, Mars",
-        image: .mercury,
-        propositions: [
-            "Mercure, Vénus, Terre, Mars",
-            "Vénus, Mercure, Terre, Mars",
-            "Mercure, Terre, Vénus, Mars",
-            "Terre, Vénus, Mercure, Mars"
-        ]
-    ),
-    Question(
-        questionTitle: "Quelle planète est la plus éloignée du Soleil ?",
-        answer: "Neptune",
-        image: .neptune,
-        propositions: ["Uranus", "Neptune", "Saturne", "Jupiter"]
-    ),
-    Question(
-        questionTitle: "Quelle planète est connue pour ses anneaux très visibles ?",
-        answer: "Saturne",
-        image: .saturn,
-        propositions: ["Saturne", "Mars", "Vénus", "Mercure"]
-    )
+    Question(questionTitle: "Combien y a-t-il de planètes dans le système solaire ?", answer: "8", image: .earth, propositions: ["7", "8", "9", "10"]),
+    Question(questionTitle: "Quelle est la plus grande planète du système solaire ?", answer: "Jupiter", image: .jupiter, propositions: ["Mars", "Jupiter", "Saturne", "Terre"]),
+    Question(questionTitle: "Quel est l’ordre correct des quatre premières planètes depuis le Soleil ?", answer: "Mercure, Vénus, Terre, Mars", image: .mercury, propositions: ["Mercure, Vénus, Terre, Mars","Vénus, Mercure, Terre, Mars","Mercure, Terre, Vénus, Mars","Terre, Vénus, Mercure, Mars"]),
+    Question(questionTitle: "Quelle planète est la plus éloignée du Soleil ?", answer: "Neptune", image: .neptune, propositions: ["Uranus", "Neptune", "Saturne", "Jupiter"]),
+    Question(questionTitle: "Quelle planète est connue pour ses anneaux très visibles ?", answer: "Saturne", image: .saturn, propositions: ["Saturne", "Mars", "Vénus", "Mercure"]),
+    Question(questionTitle: "Quelle planète a le diamètre le plus petit ?", answer: "Mercure", image: .mercury, propositions: ["Mercure", "Mars", "Vénus", "Pluton"]),
+    Question(questionTitle: "Quelle planète a le volume le plus grand ?", answer: "Jupiter", image: .jupiter, propositions: ["Jupiter", "Saturne", "Neptune", "Terre"]),
+    Question(questionTitle: "Quelle planète est plus massive : Uranus ou Neptune ?", answer: "Neptune", image: .neptune, propositions: ["Neptune", "Uranus", "Saturne", "Jupiter"]),
+    Question(questionTitle: "Quelles planètes ont une rotation très rapide sur elles-mêmes ?", answer: "Jupiter et Saturne", image: .jupiter, propositions: ["Jupiter et Saturne", "Mars et Terre", "Mercure et Vénus", "Neptune et Uranus"]),
+    Question(questionTitle: "Quelle planète a la durée d’une journée la plus longue ?", answer: "Vénus", image: .venus, propositions: ["Vénus", "Mercure", "Mars", "Jupiter"])
 ]
 
 let l1_planetesGeantes: [Question] = [
-    Question(
-        questionTitle: "Comment appelle-t-on Jupiter et Saturne, principalement composées d’hydrogène et d’hélium ?",
-        answer: "Des géantes gazeuses",
-        image: .jupiter,
-        propositions: [
-            "Des géantes gazeuses",
-            "Des planètes telluriques",
-            "Des planètes naines",
-            "Des satellites naturels"
-        ]
-    ),
-    Question(
-        questionTitle: "Quelle planète est la plus grande des géantes gazeuses ?",
-        answer: "Jupiter",
-        image: .jupiter,
-        propositions: ["Jupiter", "Saturne", "Uranus", "Neptune"]
-    ),
-    Question(
-        questionTitle: "Quelle planète est célèbre pour ses anneaux composés de glace et de roche ?",
-        answer: "Saturne",
-        image: .saturn,
-        propositions: ["Saturne", "Jupiter", "Uranus", "Neptune"]
-    ),
-    Question(
-        questionTitle: "Uranus et Neptune sont souvent classées comme…",
-        answer: "Des géantes de glace",
-        image: .uranus,
-        propositions: [
-            "Des géantes de glace",
-            "Des géantes rocheuses",
-            "Des planètes naines",
-            "Des comètes"
-        ]
-    ),
-    Question(
-        questionTitle: "Quelle planète est connue pour sa couleur bleu intense liée notamment au méthane ?",
-        answer: "Neptune",
-        image: .neptune,
-        propositions: ["Neptune", "Mars", "Mercure", "Vénus"]
-    )
+    Question(questionTitle: "Comment appelle-t-on Jupiter et Saturne, principalement composées d’hydrogène et d’hélium ?", answer: "Des géantes gazeuses", image: .jupiter, propositions: ["Des géantes gazeuses","Des planètes telluriques","Des planètes naines","Des satellites naturels"]),
+    Question(questionTitle: "Quelle planète est la plus grande des géantes gazeuses ?", answer: "Jupiter", image: .jupiter, propositions: ["Jupiter","Saturne","Uranus","Neptune"]),
+    Question(questionTitle: "Quelle planète est célèbre pour ses anneaux composés de glace et de roche ?", answer: "Saturne", image: .saturn, propositions: ["Saturne","Jupiter","Uranus","Neptune"]),
+    Question(questionTitle: "Uranus et Neptune sont souvent classées comme…", answer: "Des géantes de glace", image: .uranus, propositions: ["Des géantes de glace","Des géantes rocheuses","Des planètes naines","Des comètes"]),
+    Question(questionTitle: "Quelle planète est connue pour sa couleur bleu intense liée notamment au méthane ?", answer: "Neptune", image: .neptune, propositions: ["Neptune","Mars","Mercure","Vénus"]),
+    Question(questionTitle: "Quelle planète géante a le vent le plus rapide ?", answer: "Neptune", image: .neptune, propositions: ["Neptune","Jupiter","Saturne","Uranus"]),
+    Question(questionTitle: "Quelle planète géante a un champ magnétique le plus puissant ?", answer: "Jupiter", image: .jupiter, propositions: ["Jupiter","Saturne","Uranus","Neptune"]),
+    Question(questionTitle: "Quelle planète géante a la plus grande densité parmi elles ?", answer: "Neptune", image: .neptune, propositions: ["Neptune","Jupiter","Saturne","Uranus"]),
+    Question(questionTitle: "Quelle planète géante est inclinée presque sur le côté ?", answer: "Uranus", image: .uranus, propositions: ["Uranus","Neptune","Saturne","Jupiter"]),
+    Question(questionTitle: "Quelle planète géante a été visitée en premier par une sonde spatiale ?", answer: "Jupiter", image: .jupiter, propositions: ["Jupiter","Saturne","Uranus","Neptune"])
 ]
 
 let l1_leSoleilEtNotrePlace: [Question] = [
-    Question(
-        questionTitle: "Quelle étoile est au centre du système solaire ?",
-        answer: "Le Soleil",
-        image: .earth,
-        propositions: ["Sirius", "Polaris", "Le Soleil", "Alpha Centauri"]
-    ),
-    Question(
-        questionTitle: "Qu’est-ce qu’une orbite (dans le système solaire) ?",
-        answer: "La trajectoire d’un objet autour d’un autre",
-        image: .apolloCsm,
-        propositions: [
-            "La trajectoire d’un objet autour d’un autre",
-            "La surface d’une planète",
-            "Un type d’astéroïde",
-            "Une couche de l’atmosphère"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi les planètes restent-elles en orbite autour du Soleil ?",
-        answer: "Grâce à la gravité",
-        image: .jupiter,
-        propositions: [
-            "Grâce à la gravité",
-            "Grâce au vent solaire",
-            "Grâce au magnétisme uniquement",
-            "Grâce aux anneaux"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment s’appelle notre galaxie ?",
-        answer: "La Voie Lactée",
-        image: .dragon,
-        propositions: ["Andromède", "Orion", "La Voie Lactée", "Centaurus"]
-    ),
-    Question(
-        questionTitle: "Que signifie « année-lumière » ?",
-        answer: "Une distance",
-        image: .dragon,
-        propositions: [
-            "Une distance",
-            "Une durée",
-            "Une vitesse",
-            "Une température"
-        ]
-    )
+    Question(questionTitle: "Quelle étoile est au centre du système solaire ?", answer: "Le Soleil", image: .earth, propositions: ["Sirius","Polaris","Le Soleil","Alpha Centauri"]),
+    Question(questionTitle: "Qu’est-ce qu’une orbite (dans le système solaire) ?", answer: "La trajectoire d’un objet autour d’un autre", image: .apolloCsm, propositions: ["La trajectoire d’un objet autour d’un autre","La surface d’une planète","Un type d’astéroïde","Une couche de l’atmosphère"]),
+    Question(questionTitle: "Pourquoi les planètes restent-elles en orbite autour du Soleil ?", answer: "Grâce à la gravité", image: .jupiter, propositions: ["Grâce à la gravité","Grâce au vent solaire","Grâce au magnétisme uniquement","Grâce aux anneaux"]),
+    Question(questionTitle: "Comment s’appelle notre galaxie ?", answer: "La Voie Lactée", image: .dragon, propositions: ["Andromède","Orion","La Voie Lactée","Centaurus"]),
+    Question(questionTitle: "Que signifie « année-lumière » ?", answer: "Une distance", image: .dragon, propositions: ["Une distance","Une durée","Une vitesse","Une température"]),
+    Question(questionTitle: "Quelle est la principale source d’énergie du Soleil ?", answer: "La fusion nucléaire", image: .dragon, propositions: ["La fusion nucléaire","La combustion","Les réactions chimiques","Le vent solaire"]),
+    Question(questionTitle: "Quelle planète a le mouvement orbital le plus rapide autour du Soleil ?", answer: "Mercure", image: .mercury, propositions: ["Mercure","Venus","Terre","Mars"]),
+    Question(questionTitle: "Quel est le type de lumière principalement émis par le Soleil ?", answer: "Lumière visible et rayons UV", image: .dragon, propositions: ["Lumière visible et rayons UV","Rayons X uniquement","Infrarouge uniquement","Micro-ondes"]),
+    Question(questionTitle: "Quelle est l’étoile la plus proche après le Soleil ?", answer: "Proxima Centauri", image: .dragon, propositions: ["Proxima Centauri","Sirius","Alpha Centauri A","Polaris"]),
+    Question(questionTitle: "Quelle planète reçoit le plus d’énergie solaire ?", answer: "Mercure", image: .mercury, propositions: ["Mercure","Vénus","Terre","Mars"])
 ]
-
 // =====================
 // LEVEL 2 — LUNE & EXPLORATION (Comprendre et situer)
 // =====================
 
-let l2_laLune: [Question] = [
-    Question(
-        questionTitle: "La Lune est…",
-        answer: "Un satellite naturel de la Terre",
-        image: .earth,
-        propositions: [
-            "Un satellite naturel de la Terre",
-            "Une planète naine",
-            "Une comète",
-            "Une étoile"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi voit-on des phases de la Lune ?",
-        answer: "Parce qu’on voit différentes portions éclairées par le Soleil",
-        image: .earth,
-        propositions: [
-            "Parce qu’on voit différentes portions éclairées par le Soleil",
-            "Parce que la Lune change de taille",
-            "Parce que la Terre s’éloigne",
-            "Parce que le Soleil s’éteint par moments"
-        ]
-    ),
-    Question(
-        questionTitle: "Environ combien de temps faut-il à la Lune pour faire une révolution autour de la Terre ?",
-        answer: "Environ 27 jours",
-        image: .apolloCsm,
-        propositions: ["Environ 1 jour", "Environ 7 jours", "Environ 27 jours", "Environ 365 jours"]
-    ),
-    Question(
-        questionTitle: "Pourquoi voit-on (presque) toujours la même face de la Lune ?",
-        answer: "Elle tourne sur elle-même au même rythme qu’elle tourne autour de la Terre",
-        image: .apolloCsm,
-        propositions: [
-            "Elle tourne sur elle-même au même rythme qu’elle tourne autour de la Terre",
-            "Elle ne tourne pas sur elle-même",
-            "Le Soleil éclaire toujours la même moitié",
-            "La Terre bloque sa rotation"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment appelle-t-on une éclipse de Lune ?",
-        answer: "Quand la Terre s’interpose entre le Soleil et la Lune",
-        image: .earth,
-        propositions: [
-            "Quand la Terre s’interpose entre le Soleil et la Lune",
-            "Quand la Lune s’interpose entre le Soleil et la Terre",
-            "Quand le Soleil s’interpose entre la Terre et la Lune",
-            "Quand Mars s’interpose entre la Terre et la Lune"
-        ]
-    )
+let l2_planetesInterieures: [Question] = [
+    Question(questionTitle: "Quelle est la planète la plus proche du Soleil ?", answer: "Mercure", image: .mercury, propositions: ["Mercure","Vénus","Terre","Mars"]),
+    Question(questionTitle: "Quelle planète est surnommée la planète rouge ?", answer: "Mars", image: .mars, propositions: ["Mars","Jupiter","Vénus","Mercure"]),
+    Question(questionTitle: "Quelle planète a une atmosphère dense et toxique ?", answer: "Vénus", image: .venus, propositions: ["Vénus","Mercure","Mars","Terre"]),
+    Question(questionTitle: "Quelle est la plus grande planète tellurique ?", answer: "Terre", image: .earth, propositions: ["Terre","Mercure","Mars","Vénus"]),
+    Question(questionTitle: "Quelle planète est la plus chaude du système solaire ?", answer: "Vénus", image: .venus, propositions: ["Vénus","Mercure","Mars","Terre"]),
+    Question(questionTitle: "Mercure n’a presque pas d’… ?", answer: "Atmosphère", image: .mercury, propositions: ["Atmosphère","Océans","Volcans","Lunes"]),
+    Question(questionTitle: "Mars possède quel phénomène visible ?", answer: "Calottes polaires", image: .mars, propositions: ["Calottes polaires","Anneaux","Tempêtes de sable","Fosses océaniques"]),
+    Question(questionTitle: "Quelle planète a la journée la plus longue parmi les intérieures ?", answer: "Vénus", image: .venus, propositions: ["Vénus","Terre","Mars","Mercure"]),
+    Question(questionTitle: "Quelle planète a le plus de volcans ?", answer: "Mars", image: .mars, propositions: ["Mars","Vénus","Terre","Mercure"]),
+    Question(questionTitle: "Terre est la seule planète à posséder ?", answer: "Vie", image: .earth, propositions: ["Vie","Anneaux","Anneaux et lunes","Atmosphère de CO2"])
 ]
 
-let l2_missionsSpatiales: [Question] = [
-    Question(
-        questionTitle: "Que signifie « ISS » ?",
-        answer: "Station spatiale internationale",
-        image: .dragon,
-        propositions: [
-            "Station spatiale internationale",
-            "Système solaire interne",
-            "Institut spatial scientifique",
-            "Intercepteur spatial standard"
-        ]
-    ),
-    Question(
-        questionTitle: "À quoi sert une fusée au décollage ?",
-        answer: "À fournir la poussée pour vaincre la gravité",
-        image: .apolloCsm,
-        propositions: [
-            "À fournir la poussée pour vaincre la gravité",
-            "À produire de l’oxygène",
-            "À refroidir l’atmosphère",
-            "À faire de la lumière"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi les astronautes semblent-ils « flotter » dans l’ISS ?",
-        answer: "Parce qu’ils sont en chute libre autour de la Terre",
-        image: .dragon,
-        propositions: [
-            "Parce qu’ils sont en chute libre autour de la Terre",
-            "Parce qu’il n’y a pas de gravité du tout",
-            "Parce qu’ils sont sous l’eau",
-            "Parce que la station est aimantée"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment appelle-t-on un véhicule sans équipage envoyé explorer l’espace ou des planètes ?",
-        answer: "Une sonde",
-        image: .dragon,
-        propositions: ["Une sonde", "Un satellite météo", "Un astéroïde", "Une météorite"]
-    ),
-    Question(
-        questionTitle: "Quel est le principal rôle d’un bouclier thermique lors d’une rentrée atmosphérique ?",
-        answer: "Protéger du chauffage dû aux frottements et à la compression de l’air",
-        image: .apolloCsm,
-        propositions: [
-            "Protéger du chauffage dû aux frottements et à la compression de l’air",
-            "Produire de l’énergie solaire",
-            "Augmenter la vitesse",
-            "Créer de l’oxygène"
-        ]
-    )
+// Sublevel 2: Géantes gazeuses et glaciaires
+let l2_geantes: [Question] = [
+    Question(questionTitle: "Quelle est la plus grande planète du système solaire ?", answer: "Jupiter", image: .jupiter, propositions: ["Jupiter","Saturne","Uranus","Neptune"]),
+    Question(questionTitle: "Quelle planète est célèbre pour ses anneaux ?", answer: "Saturne", image: .saturn, propositions: ["Saturne","Jupiter","Uranus","Neptune"]),
+    Question(questionTitle: "Uranus est inclinée de façon ?", answer: "Extrêmement", image: .uranus, propositions: ["Extrêmement","Légèrement","Pas du tout","Modérément"]),
+    Question(questionTitle: "Neptune est connue pour ?", answer: "Vents violents", image: .neptune, propositions: ["Vents violents","Anneaux lumineux","Taches rouges","Lunes multiples"]),
+    Question(questionTitle: "Quelle géante gazeuse possède une tache rouge ?", answer: "Jupiter", image: .jupiter, propositions: ["Jupiter","Saturne","Uranus","Neptune"]),
+    Question(questionTitle: "Saturne est composée principalement de ?", answer: "Hydrogène et hélium", image: .saturn, propositions: ["Hydrogène et hélium","Oxygène et azote","Carbone et méthane","Fer et silicium"]),
+    Question(questionTitle: "Quelle planète est surnommée la planète bleue ?", answer: "Neptune", image: .neptune, propositions: ["Neptune","Uranus","Terre","Vénus"]),
+    Question(questionTitle: "Uranus et Neptune sont appelées ?", answer: "Géantes glaciaires", image: .uranus, propositions: ["Géantes glaciaires","Géantes gazeuses","Planètes telluriques","Planètes naines"]),
+    Question(questionTitle: "Jupiter possède combien de lunes principales ?", answer: "79", image: .jupiter, propositions: ["79","62","27","14"]),
+    Question(questionTitle: "Neptune possède une lune célèbre appelée ?", answer: "Triton", image: .neptune, propositions: ["Triton","Titan","Ganymède","Callisto"])
 ]
 
-let l2_meteoresEtAsteroides: [Question] = [
-    Question(
-        questionTitle: "Quelle est la différence entre un astéroïde et une comète (en simplifiant) ?",
-        answer: "Les comètes sont riches en glaces, les astéroïdes surtout rocheux",
-        image: .dragon,
-        propositions: [
-            "Les comètes sont riches en glaces, les astéroïdes surtout rocheux",
-            "Les comètes sont toujours plus grosses",
-            "Les astéroïdes ont une queue lumineuse",
-            "Les comètes orbitent autour de la Terre uniquement"
-        ]
-    ),
-    Question(
-        questionTitle: "Qu’est-ce qu’une météorite ?",
-        answer: "Un morceau d’objet spatial qui atteint le sol",
-        image: .mars,
-        propositions: [
-            "Un morceau d’objet spatial qui atteint le sol",
-            "Un nuage de gaz",
-            "Un satellite artificiel",
-            "Une étoile filante vue de près"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi voit-on une « étoile filante » ?",
-        answer: "Un petit objet brûle en traversant l’atmosphère",
-        image: .earth,
-        propositions: [
-            "Un petit objet brûle en traversant l’atmosphère",
-            "Une étoile tombe réellement",
-            "La Lune perd des morceaux",
-            "Le Soleil s’éteint brièvement"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment s’appelle la région du système solaire où se trouvent beaucoup d’astéroïdes entre Mars et Jupiter ?",
-        answer: "La ceinture d’astéroïdes",
-        image: .jupiter,
-        propositions: [
-            "La ceinture d’astéroïdes",
-            "La couronne solaire",
-            "La ceinture de Kuiper",
-            "Le nuage d’Oort"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi l’atmosphère terrestre nous protège-t-elle des petits objets ?",
-        answer: "Beaucoup se consument avant d’atteindre le sol",
-        image: .earth,
-        propositions: [
-            "Beaucoup se consument avant d’atteindre le sol",
-            "Elle les attire comme un aimant",
-            "Elle les transforme en eau",
-            "Elle les renvoie automatiquement vers l’espace"
-        ]
-    )
+// Sublevel 3: Astéroïdes et comètes
+let l2_astresMineurs: [Question] = [
+    Question(questionTitle: "La ceinture d’astéroïdes se trouve entre ?", answer: "Mars et Jupiter", image: .dragon, propositions: ["Mars et Jupiter","Terre et Mars","Jupiter et Saturne","Vénus et Mercure"]),
+    Question(questionTitle: "Quel astéroïde a provoqué la disparition des dinosaures ?", answer: "Chicxulub", image: .dragon, propositions: ["Chicxulub","Vesta","Ceres","Eros"]),
+    Question(questionTitle: "Les comètes sont composées principalement de ?", answer: "Glace et poussière", image: .dragon, propositions: ["Glace et poussière","Roche","Métal","Hydrogène gazeux"]),
+    Question(questionTitle: "Quand une comète s’approche du Soleil, elle forme ?", answer: "Une queue", image: .dragon, propositions: ["Une queue","Une orbite","Un champ magnétique","Une atmosphère"]),
+    Question(questionTitle: "Quel astéroïde est le plus grand du système solaire ?", answer: "Cérès", image: .dragon, propositions: ["Cérès","Vesta","Pallas","Hygiea"]),
+    Question(questionTitle: "Quel objet céleste visite périodiquement la Terre ?", answer: "Comète", image: .dragon, propositions: ["Comète","Astéroïde","Planète naine","Météore"]),
+    Question(questionTitle: "Les météoroïdes deviennent météores lorsqu’ils ?", answer: "Entrent dans l’atmosphère terrestre", image: .dragon, propositions: ["Entrent dans l’atmosphère terrestre","Sortent du système solaire","Tombent sur une planète","Se désintègrent dans l’espace"]),
+    Question(questionTitle: "Quelle est la comète célèbre visible tous les 76 ans ?", answer: "Halley", image: .dragon, propositions: ["Halley","Hale-Bopp","Encke","Lovejoy"]),
+    Question(questionTitle: "Quel astéroïde a été exploré par Hayabusa ?", answer: "Itokawa", image: .dragon, propositions: ["Itokawa","Bennu","Ryugu","Eros"]),
+    Question(questionTitle: "Quel est le rôle de la gravité dans la ceinture d’astéroïdes ?", answer: "Maintenir les astéroïdes en orbite", image: .dragon, propositions: ["Maintenir les astéroïdes en orbite","Créer des collisions","Former des lunes","Produire des comètes"])
 ]
 
-let l2_mouvementEtGravite: [Question] = [
-    Question(
-        questionTitle: "Qu’est-ce que la gravité ?",
-        answer: "Une force d’attraction entre les masses",
-        image: .earth,
-        propositions: [
-            "Une force d’attraction entre les masses",
-            "Une force qui repousse les masses",
-            "Un type de lumière",
-            "Un gaz présent dans l’espace"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi pèse-t-on moins sur la Lune que sur la Terre ?",
-        answer: "La gravité y est plus faible",
-        image: .apolloCsm,
-        propositions: [
-            "La gravité y est plus faible",
-            "L’air y est plus léger",
-            "Le Soleil y est plus loin",
-            "La Lune attire plus fort"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment s’appelle la vitesse minimale pour rester en orbite autour de la Terre (à une altitude donnée) ?",
-        answer: "La vitesse orbitale",
-        image: .dragon,
-        propositions: ["La vitesse orbitale", "La vitesse sonore", "La vitesse lumineuse", "La vitesse de chute"]
-    ),
-    Question(
-        questionTitle: "Dans l’espace, sans frottements, un objet en mouvement…",
-        answer: "Continue à avancer à vitesse constante",
-        image: .dragon,
-        propositions: [
-            "Continue à avancer à vitesse constante",
-            "S’arrête rapidement",
-            "Accélère tout seul",
-            "Tourne forcément sur lui-même"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi les planètes ont-elles des saisons (comme sur Terre) ?",
-        answer: "À cause de l’inclinaison de l’axe de rotation",
-        image: .earth,
-        propositions: [
-            "À cause de l’inclinaison de l’axe de rotation",
-            "À cause de la distance constante au Soleil",
-            "À cause de la Lune uniquement",
-            "À cause des anneaux"
-        ]
-    )
+// Sublevel 4: Soleil et phénomènes
+let l2_soleilEtPhenom: [Question] = [
+    Question(questionTitle: "Quelle est la principale source d’énergie du système solaire ?", answer: "Le Soleil", image: .sunFull, propositions: ["Le Soleil","Jupiter","Mars","La Terre"]),
+    Question(questionTitle: "Quelle couche du Soleil est visible depuis la Terre ?", answer: "Photosphère", image: .sunFull, propositions: ["Photosphère","Chromosphère","Noyau","Couronne"]),
+    Question(questionTitle: "Comment s’appellent les éruptions solaires ?", answer: "Éruptions solaires ou flares", image: .sunFull, propositions: ["Éruptions solaires","Tornades","Vents solaires","Pluies de météores"]),
+    Question(questionTitle: "Quel phénomène solaire affecte les aurores sur Terre ?", answer: "Vents solaires", image: .sunFull, propositions: ["Vents solaires","Lumière du Soleil","Rayons gamma","Chaleur solaire"]),
+    Question(questionTitle: "Quelle est la température approximative du noyau solaire ?", answer: "15 millions de °C", image: .sunFull, propositions: ["15 millions de °C","5 500 °C","100 000 °C","1 million de °C"]),
+    Question(questionTitle: "Le Soleil est une étoile de type ?", answer: "Naine jaune", image: .sunFull, propositions: ["Naine jaune","Supergéante rouge","Naine blanche","Géante bleue"]),
+    Question(questionTitle: "Comment s’appelle le cycle de 11 ans du Soleil ?", answer: "Cycle solaire", image: .sunFull, propositions: ["Cycle solaire","Cycle lunaire","Cycle magnétique terrestre","Cycle des planètes"]),
+    Question(questionTitle: "Quelle couche solaire produit la lumière et la chaleur ?", answer: "Noyau", image: .sunFull, propositions: ["Noyau","Photosphère","Couronne","Chromosphère"]),
+    Question(questionTitle: "Quelle planète est affectée par les taches solaires ?", answer: "Toutes les planètes avec atmosphère", image: .sunFull, propositions: ["Toutes les planètes avec atmosphère","Seulement la Terre","Jupiter uniquement","Mars uniquement"]),
+    Question(questionTitle: "Qu’est-ce que le vent solaire ?", answer: "Flux de particules émises par le Soleil", image: .sunFull, propositions: ["Flux de particules émises par le Soleil","Rayons lumineux","Chaleur infrarouge","Ondes radio"])
 ]
 
 // =====================
 // LEVEL 3 — ÉTOILES & GALAXIES (Approfondir grand public)
 // =====================
 
-let l3_lesEtoiles: [Question] = [
-    Question(
-        questionTitle: "Une étoile brille parce que…",
-        answer: "Des réactions de fusion nucléaire produisent de l’énergie",
-        image: .dragon,
-        propositions: [
-            "Des réactions de fusion nucléaire produisent de l’énergie",
-            "Elle reflète la lumière d’une planète",
-            "Elle est en feu comme du bois",
-            "Elle contient de l’oxygène qui brûle"
-        ]
-    ),
-    Question(
-        questionTitle: "Le Soleil est…",
-        answer: "Une étoile",
-        image: .earth,
-        propositions: ["Une étoile", "Une planète", "Une comète", "Un astéroïde"]
-    ),
-    Question(
-        questionTitle: "Comment s’appelle la « naissance » d’une étoile, à partir de gaz et de poussières ?",
-        answer: "Dans une nébuleuse",
-        image: .dragon,
-        propositions: ["Dans une nébuleuse", "Dans un océan", "Dans une ceinture d’astéroïdes", "Dans une atmosphère"]
-    ),
-    Question(
-        questionTitle: "Comment appelle-t-on la fin de vie explosive de certaines étoiles massives ?",
-        answer: "Une supernova",
-        image: .dragon,
-        propositions: ["Une supernova", "Une éclipse", "Une orbite", "Une comète"]
-    ),
-    Question(
-        questionTitle: "Pourquoi la couleur d’une étoile est-elle liée à sa température ?",
-        answer: "Plus elle est chaude, plus sa lumière tire vers le bleu",
-        image: .dragon,
-        propositions: [
-            "Plus elle est chaude, plus sa lumière tire vers le bleu",
-            "Plus elle est froide, plus elle devient invisible",
-            "La couleur dépend uniquement de la distance",
-            "La couleur dépend uniquement des planètes autour"
-        ]
-    )
+let l3_missionsHistoriques: [Question] = [
+    Question(questionTitle: "Quel programme a amené les premiers humains sur la Lune ?", answer: "Apollo", image: .apolloCsm, propositions: ["Apollo","Gemini","Soyouz","Dragon"]),
+    Question(questionTitle: "En quelle année Apollo 11 a-t-il atterri sur la Lune ?", answer: "1969", image: .apolloCsm, propositions: ["1965","1969","1972","1961"]),
+    Question(questionTitle: "Qui a été le premier homme à marcher sur la Lune ?", answer: "Neil Armstrong", image: .apolloCsm, propositions: ["Neil Armstrong","Buzz Aldrin","Yuri Gagarin","Michael Collins"]),
+    Question(questionTitle: "Quelle sonde a exploré Mars en 1976 ?", answer: "Viking 1", image: .dragon, propositions: ["Viking 1","Voyager 1","Mariner 9","Curiosity"]),
+    Question(questionTitle: "Quelle mission a permis de visiter Jupiter pour la première fois ?", answer: "Pioneer 10", image: .jupiter, propositions: ["Pioneer 10","Voyager 2","Galileo","Juno"]),
+    Question(questionTitle: "Quel véhicule est utilisé pour le transport privé des astronautes vers ISS ?", answer: "SpaceX Dragon", image: .dragon, propositions: ["SpaceX Dragon","Apollo CSM","Soyouz","Starship"]),
+    Question(questionTitle: "Quelle mission a permis de survoler Pluton en 2015 ?", answer: "New Horizons", image: .dragon, propositions: ["New Horizons","Voyager 1","Cassini","Pioneer 10"]),
+    Question(questionTitle: "Qui a été le premier homme dans l’espace ?", answer: "Youri Gagarine", image: .dragon, propositions: ["Youri Gagarine","Neil Armstrong","Buzz Aldrin","Alan Shepard"]),
+    Question(questionTitle: "Quelle sonde a photographié Saturne et ses anneaux en détail ?", answer: "Cassini", image: .saturn, propositions: ["Cassini","Voyager 2","Galileo","Juno"]),
+    Question(questionTitle: "Quel pays a envoyé le premier satellite artificiel ?", answer: "URSS", image: .dragon, propositions: ["URSS","USA","Chine","Japon"])
 ]
 
-let l3_galaxies: [Question] = [
-    Question(
-        questionTitle: "Qu’est-ce qu’une galaxie ?",
-        answer: "Un immense ensemble d’étoiles, de gaz et de poussières lié par la gravité",
-        image: .dragon,
-        propositions: [
-            "Un immense ensemble d’étoiles, de gaz et de poussières lié par la gravité",
-            "Une seule étoile très grande",
-            "Une planète géante",
-            "Un nuage d’air dans l’espace"
-        ]
-    ),
-    Question(
-        questionTitle: "Dans quel type de galaxie se trouve le système solaire ?",
-        answer: "Une galaxie spirale",
-        image: .dragon,
-        propositions: ["Une galaxie spirale", "Une galaxie annulaire", "Une galaxie carrée", "Une galaxie comète"]
-    ),
-    Question(
-        questionTitle: "Comment s’appelle la galaxie la plus proche de la Voie Lactée (très connue du grand public) ?",
-        answer: "Andromède",
-        image: .dragon,
-        propositions: ["Andromède", "Orion", "Centaurus", "Cassiopeia"]
-    ),
-    Question(
-        questionTitle: "Pourquoi voit-on la Voie Lactée comme une « bande » dans le ciel ?",
-        answer: "Parce qu’on la voit depuis l’intérieur, dans le plan de la galaxie",
-        image: .dragon,
-        propositions: [
-            "Parce qu’on la voit depuis l’intérieur, dans le plan de la galaxie",
-            "Parce qu’elle est une comète",
-            "Parce que la Lune la coupe en deux",
-            "Parce qu’elle est faite d’eau"
-        ]
-    ),
-    Question(
-        questionTitle: "Qu’appelle-t-on un amas d’étoiles ?",
-        answer: "Un groupe d’étoiles liées par la gravité",
-        image: .dragon,
-        propositions: [
-            "Un groupe d’étoiles liées par la gravité",
-            "Une seule étoile très lumineuse",
-            "Une planète avec plusieurs lunes",
-            "Une traînée de météores"
-        ]
-    )
+let l3_stationSpatialeEtVie: [Question] = [
+    Question(questionTitle: "Comment s'appelle la station spatiale internationale ?", answer: "ISS", image: .dragon, propositions: ["ISS","Tiangong","Mir","Skylab"]),
+    Question(questionTitle: "Depuis quand l’ISS est-elle habitée en continu ?", answer: "2000", image: .dragon, propositions: ["1995","2000","2010","1990"]),
+    Question(questionTitle: "Quelle est la principale fonction de l’ISS ?", answer: "Recherche scientifique en microgravité", image: .dragon, propositions: ["Recherche scientifique en microgravité","Tourisme spatial","Observation des étoiles","Armement spatial"]),
+    Question(questionTitle: "Quel type de gravité est simulé à l’ISS ?", answer: "Microgravité", image: .dragon, propositions: ["Microgravité","Zéro gravité","Gravité terrestre","Hypergravité"]),
+    Question(questionTitle: "Comment les astronautes mangent-ils dans l’espace ?", answer: "Aliments lyophilisés et emballés", image: .dragon, propositions: ["Aliments lyophilisés et emballés","Repas frais","Aliments crus","Repas liquides uniquement"]),
+    Question(questionTitle: "Quel organisme international gère l’ISS ?", answer: "NASA, ESA, Roscosmos, JAXA, CSA", image: .dragon, propositions: ["NASA, ESA, Roscosmos, JAXA, CSA","NASA seulement","ESA seulement","Roscosmos seulement"]),
+    Question(questionTitle: "Quel est l’un des risques majeurs pour la santé des astronautes ?", answer: "Perte osseuse et musculaire", image: .dragon, propositions: ["Perte osseuse et musculaire","Surpoids","Déshydratation","Hyperactivité"]),
+    Question(questionTitle: "Quelle est la durée moyenne d’une mission à l’ISS ?", answer: "6 mois", image: .dragon, propositions: ["3 mois","6 mois","12 mois","1 mois"]),
+    Question(questionTitle: "Quels moyens utilisent les astronautes pour se déplacer à l’ISS ?", answer: "En flottant et en se tenant aux mains courantes", image: .dragon, propositions: ["En flottant et en se tenant aux mains courantes","En marchant normalement","Avec des roues","Avec des drones internes"]),
+    Question(questionTitle: "Comment l’ISS est-elle alimentée en énergie ?", answer: "Panneaux solaires", image: .dragon, propositions: ["Panneaux solaires","Réacteurs nucléaires","Batteries chimiques","Turbines à vent"])
 ]
 
-let l3_lumiereEtDistances: [Question] = [
-    Question(
-        questionTitle: "Pourquoi regarde-t-on « dans le passé » quand on observe des objets très lointains ?",
-        answer: "Parce que la lumière met du temps à nous parvenir",
-        image: .dragon,
-        propositions: [
-            "Parce que la lumière met du temps à nous parvenir",
-            "Parce que l’espace inverse le temps",
-            "Parce que nos yeux ralentissent",
-            "Parce que les étoiles se déplacent trop vite"
-        ]
-    ),
-    Question(
-        questionTitle: "Qu’est-ce qu’une année-lumière (rappel) ?",
-        answer: "La distance parcourue par la lumière en un an",
-        image: .dragon,
-        propositions: [
-            "La distance parcourue par la lumière en un an",
-            "La durée d’un voyage spatial",
-            "La vitesse d’une fusée",
-            "Le temps d’une rotation terrestre"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi les astronomes utilisent-ils souvent des télescopes ?",
-        answer: "Pour capter plus de lumière et observer des objets faibles",
-        image: .dragon,
-        propositions: [
-            "Pour capter plus de lumière et observer des objets faibles",
-            "Pour rapprocher physiquement les étoiles",
-            "Pour rendre l’espace plus chaud",
-            "Pour arrêter le mouvement des planètes"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment s’appelle l’instrument qui disperse la lumière pour analyser sa composition ?",
-        answer: "Un spectroscope",
-        image: .dragon,
-        propositions: ["Un spectroscope", "Un microscope", "Un baromètre", "Un compas"]
-    ),
-    Question(
-        questionTitle: "À quoi sert l’analyse du spectre d’une étoile ?",
-        answer: "À connaître sa composition et sa température (entre autres)",
-        image: .dragon,
-        propositions: [
-            "À connaître sa composition et sa température (entre autres)",
-            "À mesurer le poids des astronautes",
-            "À ralentir la lumière",
-            "À créer de la gravité"
-        ]
-    )
+let l3_robotiqueEtExploration: [Question] = [
+    Question(questionTitle: "Quel rover a exploré Mars à partir de 2012 ?", answer: "Curiosity", image: .mars, propositions: ["Curiosity","Spirit","Opportunity","Perseverance"]),
+    Question(questionTitle: "Quel rover est actuellement actif sur Mars ?", answer: "Perseverance", image: .mars, propositions: ["Perseverance","Curiosity","Spirit","Opportunity"]),
+    Question(questionTitle: "Quelle sonde a été envoyée pour étudier Mercure ?", answer: "Messenger", image: .mercury, propositions: ["Messenger","Mariner 10","BepiColombo","Venera"]),
+    Question(questionTitle: "Quelle sonde a exploré Vénus ?", answer: "Venera", image: .venus, propositions: ["Venera","Magellan","Venus Express","Pioneer Venus"]),
+    Question(questionTitle: "Quel robot a exploré la surface de l’astéroïde Ryugu ?", answer: "Hayabusa2", image: .dragon, propositions: ["Hayabusa2","OSIRIS-REx","Rosetta","Dawn"]),
+    Question(questionTitle: "Quel robot a collecté des échantillons de l’astéroïde Bennu ?", answer: "OSIRIS-REx", image: .dragon, propositions: ["OSIRIS-REx","Hayabusa2","New Horizons","Dawn"]),
+    Question(questionTitle: "Quel robot a exploré Titan ?", answer: "Huygens", image: .dragon, propositions: ["Huygens","Cassini","Voyager 1","Galileo"]),
+    Question(questionTitle: "Quel rover a analysé la roche martienne appelée 'John Klein' ?", answer: "Curiosity", image: .mars, propositions: ["Curiosity","Perseverance","Spirit","Opportunity"]),
+    Question(questionTitle: "Quelle sonde a étudié la ceinture d’astéroïdes entre Mars et Jupiter ?", answer: "Dawn", image: .dragon, propositions: ["Dawn","Galileo","Cassini","Pioneer 10"]),
+    Question(questionTitle: "Quel robot a atterri sur la comète 67P ?", answer: "Philae", image: .dragon, propositions: ["Philae","Rosetta","Hayabusa","New Horizons"])
 ]
 
-let l3_exoplanetesIntro: [Question] = [
-    Question(
-        questionTitle: "Qu’est-ce qu’une exoplanète ?",
-        answer: "Une planète en dehors du système solaire",
-        image: .dragon,
-        propositions: [
-            "Une planète en dehors du système solaire",
-            "Une lune de Jupiter",
-            "Une comète très rapide",
-            "Une planète naine"
-        ]
-    ),
-    Question(
-        questionTitle: "Pourquoi est-il difficile de voir directement une exoplanète ?",
-        answer: "Son étoile est très brillante par comparaison",
-        image: .dragon,
-        propositions: [
-            "Son étoile est très brillante par comparaison",
-            "Parce qu’elles n’existent pas",
-            "Parce que la lumière va trop vite",
-            "Parce que la gravité les rend invisibles"
-        ]
-    ),
-    Question(
-        questionTitle: "Une méthode très utilisée pour détecter des exoplanètes consiste à observer…",
-        answer: "La baisse de luminosité de l’étoile lors du passage de la planète",
-        image: .dragon,
-        propositions: [
-            "La baisse de luminosité de l’étoile lors du passage de la planète",
-            "La couleur de la Lune",
-            "Le bruit des météorites",
-            "La taille des anneaux de Saturne"
-        ]
-    ),
-    Question(
-        questionTitle: "Comment appelle-t-on cette méthode de détection par baisse de lumière ?",
-        answer: "La méthode des transits",
-        image: .dragon,
-        propositions: ["La méthode des transits", "La méthode des anneaux", "La méthode des éclipses", "La méthode des comètes"]
-    ),
-    Question(
-        questionTitle: "Pourquoi s’intéresse-t-on beaucoup aux exoplanètes ?",
-        answer: "Pour comprendre la diversité des systèmes planétaires et chercher des mondes habitables",
-        image: .dragon,
-        propositions: [
-            "Pour comprendre la diversité des systèmes planétaires et chercher des mondes habitables",
-            "Pour changer la couleur du ciel",
-            "Pour ralentir le Soleil",
-            "Pour faire disparaître les galaxies"
-        ]
-    )
+let l3_nouvellesTechnologies: [Question] = [
+    Question(questionTitle: "Quelle technologie permet le lancement réutilisable de fusées ?", answer: "Falcon 9 et Falcon Heavy", image: .dragon, propositions: ["Falcon 9 et Falcon Heavy","Saturn V","Soyouz","Ariane 5"]),
+    Question(questionTitle: "Quel véhicule privé a transporté des astronautes vers ISS ?", answer: "SpaceX Crew Dragon", image: .dragon, propositions: ["SpaceX Crew Dragon","Apollo CSM","Soyouz","Starliner"]),
+    Question(questionTitle: "Quelle technologie est utilisée pour détecter des exoplanètes ?", answer: "Transit et vélocité radiale", image: .dragon, propositions: ["Transit et vélocité radiale","Radar terrestre","Photographie directe","Laser orbital"]),
+    Question(questionTitle: "Quel télescope est actuellement en orbite pour l’observation en infrarouge ?", answer: "James Webb", image: .dragon, propositions: ["James Webb","Hubble","Spitzer","Kepler"]),
+    Question(questionTitle: "Quel type d’impression 3D est utilisée sur l’ISS ?", answer: "Impression 3D par dépôt de filament", image: .dragon, propositions: ["Impression 3D par dépôt de filament","Stéréolithographie","Frittage laser","Frittage sélectif"]),
+    Question(questionTitle: "Quelle entreprise développe le Starship pour missions lunaires ?", answer: "SpaceX", image: .dragon, propositions: ["SpaceX","Blue Origin","NASA","Roscosmos"]),
+    Question(questionTitle: "Quelle technologie permet de créer des mini-satellites économiques ?", answer: "CubeSats", image: .dragon, propositions: ["CubeSats","GPS","Télémétrie","FalconSat"]),
+    Question(questionTitle: "Quel télescope détecte des planètes autour d’autres étoiles ?", answer: "Kepler", image: .dragon, propositions: ["Kepler","Hubble","James Webb","TESS"]),
+    Question(questionTitle: "Quelle technologie a permis la navigation autonome des rovers ?", answer: "Vision par ordinateur et capteurs", image: .dragon, propositions: ["Vision par ordinateur et capteurs","Gyroscopes uniquement","Magnétomètres","GPS spatial"]),
+    Question(questionTitle: "Quel système utilise les communications laser dans l’espace ?", answer: "LCRD", image: .dragon, propositions: ["LCRD","DSN","TDRS","Starlink"])
 ]
 
 // =====================
@@ -857,7 +434,6 @@ let l4_trousNoirsIntro: [Question] = [
         ]
     )
 ]
-
 // =====================
 // LEVEL 5 — FRONTIÈRES (Exoplanètes, astrobiologie, questions « modernes »)
 // =====================
@@ -1134,28 +710,28 @@ var quizzes: [Quiz] = [
         level: 2,
         theme: "Observation & exploration",
         image: .apolloCsm,
-        questions: l2_laLune
+        questions: l2_planetesInterieures
     ),
     Quiz(
         title: "Missions spatiales",
         level: 2,
         theme: "Observation & exploration",
         image: .dragon,
-        questions: l2_missionsSpatiales
+        questions: l2_geantes
     ),
     Quiz(
         title: "Météores & astéroïdes",
         level: 2,
         theme: "Observation & exploration",
         image: .mars,
-        questions: l2_meteoresEtAsteroides
+        questions: l2_astresMineurs
     ),
     Quiz(
         title: "Mouvement & gravité",
         level: 2,
         theme: "Observation & exploration",
         image: .earth,
-        questions: l2_mouvementEtGravite
+        questions: l2_soleilEtPhenom
     ),
     
     // =====================
@@ -1166,28 +742,28 @@ var quizzes: [Quiz] = [
         level: 3,
         theme: "Astronomie — Étoiles & galaxies",
         image: .dragon,
-        questions: l3_lesEtoiles
+        questions: l3_missionsHistoriques
     ),
     Quiz(
         title: "Les galaxies",
         level: 3,
         theme: "Astronomie — Étoiles & galaxies",
         image: .dragon,
-        questions: l3_galaxies
+        questions: l3_stationSpatialeEtVie
     ),
     Quiz(
         title: "Lumière & distances",
         level: 3,
         theme: "Astronomie — Étoiles & galaxies",
         image: .dragon,
-        questions: l3_lumiereEtDistances
+        questions: l3_robotiqueEtExploration
     ),
     Quiz(
         title: "Exoplanètes (intro)",
         level: 3,
         theme: "Astronomie — Étoiles & galaxies",
         image: .neptune,
-        questions: l3_exoplanetesIntro
+        questions: l3_nouvellesTechnologies
     ),
     
     // =====================

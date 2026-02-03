@@ -23,16 +23,20 @@ struct QuizCardView: View {
                 ZStack {
                     
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundStyle(Color.secondaryBlue)
+                        .foregroundStyle(Color.gradientBlue300)
                         .frame(width: 100, height: 100)
                     Image(quiz.image)
                         .frame(width: 50, height: 50)
                         .padding(3)
                     
                 }
+                
+                .padding(.bottom, -15)
+                
                 Text(quiz.title)
                     .foregroundStyle(Color.white)
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
+                    .font(.callout)
                     .frame(width: 100, height: 70)
             }
         }

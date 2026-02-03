@@ -58,6 +58,7 @@ struct QuizHomeView: View {
                     
                     VStack {
                         
+                        
                         HStack {
                             
                             VStack(alignment: .leading) {
@@ -78,6 +79,7 @@ struct QuizHomeView: View {
                             .padding(.leading)
                             
                         }
+                        .padding(.top, 55)
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -94,7 +96,6 @@ struct QuizHomeView: View {
                                             
                                         }
                                 }
-                                
                             }
                             .padding(.horizontal)
                         } .padding(.bottom, 20)
@@ -102,7 +103,7 @@ struct QuizHomeView: View {
                     }
                     
                     // =====================
-                    // NIVEAU 2 (verrouillé tant que le quizz 4 n'est pas fait)
+                    // NIVEAU 2 (verrouillé tant que le 4e quiz n'est pas fait)
                     // =====================
                     
                     VStack {
@@ -122,6 +123,8 @@ struct QuizHomeView: View {
                                     .fontWeight(.light)
                                     .font(.title3)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .grayscale(level2Locked ? 1.0 : 0.0)
+                                    .opacity(level2Locked ? 0.6 : 1.0)
                                 
                             }
                             .padding(.leading)
@@ -142,7 +145,14 @@ struct QuizHomeView: View {
                                         .grayscale(level2Locked ? 1.0 : 0.0)
                                         .opacity(level2Locked ? 0.6 : 1.0)
                                         .allowsHitTesting(!level2Locked)
-                                    
+                                        .overlay(alignment: .topTrailing) {
+                                            
+                                            if progress.isCompleted(quiz) {
+                                                Image(systemName: "checkmark.circle.fill")
+                                                    .foregroundStyle(.white)
+                                                    .padding(6)
+                                            }
+                                        }
                                 }
                             }
                             .padding(.horizontal)
@@ -171,6 +181,8 @@ struct QuizHomeView: View {
                                     .fontWeight(.light)
                                     .font(.title3)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .grayscale(level3Locked ? 1.0 : 0.0)
+                                    .opacity(level3Locked ? 0.6 : 1.0)
                                 
                             }
                             .padding(.leading)
@@ -220,6 +232,8 @@ struct QuizHomeView: View {
                                     .fontWeight(.light)
                                     .font(.title3)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .grayscale(level4Locked ? 1.0 : 0.0)
+                                    .opacity(level4Locked ? 0.6 : 1.0)
                                 
                             }
                             .padding(.leading)
@@ -268,6 +282,8 @@ struct QuizHomeView: View {
                                     .fontWeight(.light)
                                     .font(.title3)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .grayscale(level5Locked ? 1.0 : 0.0)
+                                    .opacity(level5Locked ? 0.6 : 1.0)
                                 
                             }
                             .padding(.leading)
@@ -294,7 +310,6 @@ struct QuizHomeView: View {
                         } .padding(.bottom, 20)
                         
                     }
-                    
                     .navigationTitle("Quiz")
                 }
                 

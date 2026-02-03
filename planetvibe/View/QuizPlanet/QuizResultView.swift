@@ -20,16 +20,16 @@ struct QuizResultView: View {
                 .ignoresSafeArea()
             
             VStack (spacing: 30) {
-                Text("Résultat")
+                Text("Bravo !")
                     .font(.largeTitle)
                     .bold()
                 HStack{
-                    Text("Tu as trouvé")
+                    Text("Tu as obtenu")
                         .font(.title2)
-                    Text("\(score)/5")
+                    Text("\(score)/10")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.yellow)
-                    Text("réponses correctes !")
+                    Text("bonnes réponses !")
                         .font(.title3)
                 }
                 
@@ -37,7 +37,7 @@ struct QuizResultView: View {
                     .resizable()
                     .scaledToFit()
                 
-                Text("Tu veux approfondir tes connaissances tu peux jetter un coup d'oeil au chapitre")
+                Text("Envie d'en savoir plus ? Découvre le chapitre associé !")
                 
                 VStack{
                     
@@ -48,7 +48,7 @@ struct QuizResultView: View {
                             WikiDetailView(article: article)
                         }
                     } label: {
-                        Text("Revoir le chapitre")
+                        Text("Approfondir mes connaissances")
                             .foregroundColor(.white)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 12)
@@ -63,7 +63,7 @@ struct QuizResultView: View {
                         returnToHome = true
                         dismiss()
                     } label: {
-                        Text("Retourner à l'accueil Quiz")
+                        Text("Découvrir le niveau suivant")
                             .foregroundColor(.gradientBlue200)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 12)

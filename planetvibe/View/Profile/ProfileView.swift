@@ -1,88 +1,115 @@
-//
-//  ProfileView.swift
-//  planetvibe
-//
-//  Created by Mohamed Makria on 28/01/2026.
-//
-
 import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
         
         NavigationStack{
-            VStack{
+            ZStack{
+                Color(.primaryBlue)
+                    .ignoresSafeArea()
                 
-                VStack (spacing:12 ) {
-                    Image (systemName: "person.crop.circle.fill")
-                        .resizable()
-                        .frame(width: 99, height: 99)
-                        .foregroundColor(.blue)
-                    Text("prenom et nom")
-                        .font(.title2)
-                        .bold()
-                    Text ("prenom et nom")
-                        .foregroundColor(.secondary)
-                    Button("Modifier le profil") {
+                VStack{
+                    
+                    VStack (spacing:12 ) {
+                        Image (.pandora)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 99, height: 99)
+                            .clipShape(Circle())
+                            .foregroundColor(.white)
                         
-                        
-                    }
-                    HStack{
-                        ZStack{
-                            Rectangle()
-                                .fill(Color .brown)
-                                .frame(width: 150,height: 150)
+                        Text("prenom et nom")
+                            .font(.title2)
+                            .bold()
+                        Text ("prenom et nom")
+                            .foregroundColor(.white)
+                        Button("Modifier le profil")
+                        {
                             
-                            VStack {
-                                Text("5 ")
-                                Text("QUIZ")
-                                VStack{
-                                    Text("FAIS")
+                            
+                        }
+                        HStack{
+                            
+                            HStack{
+                                // MARK: premiere card
+                                HStack{
+                                    ZStack{
+                                        Rectangle()
+                                            .stroke(.blue, lineWidth: 4)
+                                        
+                                            .frame(width: 96,height: 99)
+                                        VStack{
+                                            Text("5 ")
+                                            Text("QUIZ")
+                                            VStack{
+                                                Text("FAIS")
+                                            }
+                                        }
+                                    }
+                                    HStack{
+                                        
+                                        ZStack{
+                                            // MARK: deuxieme card
+                                            
+                                            Rectangle()
+                                                .stroke(.blue, lineWidth: 4)
+                                            
+                                                .frame(width: 96,height: 99 )
+                                            VStack {
+                                                
+                                                Text("96%")
+                                                    .foregroundStyle(.white)
+                                                
+                                                Text("bonnes")
+                                                    .foregroundStyle(.white)
+                                                
+                                                VStack{
+                                                    Text("REPONSES")
+                                                        .foregroundStyle(.white)
+                                                }
+                                            }
+                                        }
+                                        
+                                        HStack{
+                                            
+                                            ZStack{
+                                                // MARK: Troisieme card
+                                                
+                                                Rectangle()
+                                                    .stroke(.blue, lineWidth: 4)
+                                                    .frame(width: 96, height: 99)
+                                                VStack{
+                                                    Text("3")
+                                                    Text("Quiz" )
+                                                    VStack{
+                                                        Text ("PAR")
+                                                        Text("semaine")
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                        }
+                                    }
                                 }
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding()
                             
+                            // info
                             
                         }
-                        ZStack{
-                            Rectangle()
-                                .fill(Color .brown)
-                                .frame(width: 150,height: 150 )
-                            VStack {
-                                Text("96%")
-                                Text("bonnes")
-                                VStack{
-                                    Text("REPONSES")
-                                }
-                            }
-                            
+                        Section("Informations") {
+                            Label ("jeanemail.com" , systemImage: "bell")
+                            Label("confidentialitÃ©", systemImage:"lock")
+                            Label("mode sombre" , systemImage:"moon")
                             
                         }
                         
-                    }
-                    ZStack{
-                        Rectangle()
-                            .fill(Color .brown)
-                            .frame(width: 150, height: 150)
-                        VStack{
-                            Text("3")
-                            Text("Quiz PAR SEMAINE" )
-                        }
                     }
                 }
             }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .listRowBackground(Color.clear)
-            
-            // info
-            Section("Informations") {
-                Label ("jeanemail.com" , systemImage: "bell")
-                Label("confidentialité", systemImage:"lock")
-                Label("mode sombre" , systemImage:"moon")
-            }
-            Spacer()
         }
-        
     }
 }
 

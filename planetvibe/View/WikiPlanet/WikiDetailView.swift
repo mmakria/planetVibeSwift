@@ -78,7 +78,7 @@ struct WikiDetailView: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Text(section.title)
                                 .font(.title2)
-                                .bold()
+                                .fontWeight(.semibold)
                                 .foregroundStyle(.white)
 
                             if let sectionImage = section.image {

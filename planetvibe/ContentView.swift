@@ -22,6 +22,7 @@ struct ContentView: View {
                     Label("Profile", systemImage: "person.fill")
                 }
         }
+        .tint(.gradientBlue300)
     }
 }
 
@@ -29,5 +30,6 @@ struct ContentView: View {
     ContentView(article: articles[1])
         .environmentObject(QuizProgressStore(quizzes: quizzes))
 }
+
 
 

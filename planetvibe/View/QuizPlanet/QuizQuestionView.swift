@@ -21,6 +21,7 @@ struct QuizQuestionView: View {
     @State private var score: Int = 0
     @State private var showResult = false
     @State private var returnToHome = false
+
     @Environment(\.dismiss) private var dismiss
     
     // Grid layout
@@ -29,15 +30,9 @@ struct QuizQuestionView: View {
         GridItem(.flexible(), spacing: 20)
     ]
     
-    // Check if current question is answered
-    var hasAnsweredCurrentQuestion: Bool {
-        selectedAnswers[currentQuestionIndex] != nil
-    }
-    
     var body: some View {
         
         let question = questions[currentQuestionIndex]
-        let progress = Double(currentQuestionIndex + 1) / Double(questions.count)
         
         ZStack {
             Color.primaryBlue.ignoresSafeArea()
@@ -48,12 +43,6 @@ struct QuizQuestionView: View {
                 Text("Question \(currentQuestionIndex + 1) / \(questions.count)")
                     .foregroundColor(.white.opacity(0.9))
                     .font(.headline)
-                
-                // Progress bar
-                ProgressView(value: progress)
-                    .tint(.secondaryBlue)
-                    .scaleEffect(x: 1, y: 3)
-                    .padding(.horizontal)
                 
                 ZStack {
                     Image("skyNew")
@@ -72,7 +61,8 @@ struct QuizQuestionView: View {
                 // Question text
                 Text(question.questionTitle)
                     .foregroundColor(.white)
-                    .font(.title2.bold())
+                    .font(.title2)
+                    .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
@@ -85,12 +75,12 @@ struct QuizQuestionView: View {
                             selectAnswer(index)
                         } label: {
                             Text(answer)
-                                .font(.title2)
+                                .font(.title3)
+                                .fontWeight(.regular)
                                 .foregroundColor(.white)
-                                .frame(width: 190, height: 100)
+                                .frame(width: 180, height: 100)
                                 .background(buttonColor(index: index))
                                 .cornerRadius(12)
-                                .scaleEffect(selectedAnswers[currentQuestionIndex] == index ? 1.05 : 1)
                         }
                         .disabled(selectedAnswers[currentQuestionIndex] != nil)
                     }
@@ -101,12 +91,13 @@ struct QuizQuestionView: View {
                 // Navigation buttons
                 HStack(spacing: 5) {
                     
-                    Button {
-                        if currentQuestionIndex > 0 {
+                    //  Hide "Précédent" on first question
+                    if currentQuestionIndex > 0 {
+                        Button {
                             currentQuestionIndex -= 1
+                        } label: {
+                            navButton("Précédent")
                         }
-                    } label: {
-                        navButton("Précédent")
                     }
                     
                     Image(systemName: "lightbulb.circle.fill")
@@ -121,9 +112,8 @@ struct QuizQuestionView: View {
                         }
                     } label: {
                         navButton("Suivant")
-                            .opacity(hasAnsweredCurrentQuestion ? 1 : 0.5)
+                        
                     }
-                    .disabled(!hasAnsweredCurrentQuestion)  //answer before continue
                 }
                 .padding(.bottom, 30)
             }
@@ -155,18 +145,18 @@ struct QuizQuestionView: View {
     
     // Button color logic
     func buttonColor(index: Int) -> Color {
-        guard let selected = selectedAnswers[currentQuestionIndex] else {
+        guard selectedAnswers[currentQuestionIndex] != nil else {
             return .gradientBlue100
         }
         
         let question = questions[currentQuestionIndex]
         let correctIndex = question.propositions.firstIndex(of: question.answer)
         
-        if index == selected {
-            return index == correctIndex ? .green : .red
+        if index == correctIndex {
+            return .greenPlanet
+        } else {
+            return .redPlanet
         }
-        
-        return .gradientBlue100
     }
     
     // Navigation button
