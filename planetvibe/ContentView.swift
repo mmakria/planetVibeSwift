@@ -7,7 +7,6 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            
             WikiHomeView()
                 .tabItem {
                     Label("Planètes", systemImage: "graduationcap")
@@ -22,7 +21,7 @@ struct ContentView: View {
                     Label("Profile", systemImage: "person.fill")
                 }
         }
-        .tint(.gradientBlue300)
+        .tint(.secondaryBlue)
     }
 }
 
@@ -30,6 +29,4 @@ struct ContentView: View {
     ContentView(article: articles[1])
         .environmentObject(QuizProgressStore(quizzes: quizzes))
 }
-
-
 

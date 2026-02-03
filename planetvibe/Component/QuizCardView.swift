@@ -55,7 +55,8 @@ struct QuizCardView: View {
                     questionTitle: "Quelle est la planète la plus proche du Soleil ?",
                     answer: "Mercure",
                     image: .mercury,
-                    propositions: ["Mercure", "Vénus", "Terre", "Mars"]
+                    propositions: ["Mercure", "Vénus", "Terre", "Mars"],
+                    hint: "C'est aussi la plus petite et la plus rapide 🌞"
                 ),
             ]
         )

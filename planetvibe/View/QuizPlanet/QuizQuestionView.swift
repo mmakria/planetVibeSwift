@@ -11,6 +11,7 @@ struct QuizQuestionView: View {
     
     let quiz: Quiz
     var questions: [Question] { quiz.questions }
+    @State var showHint: Bool = false
     
     @State private var currentQuestionIndex = 0
     
@@ -21,7 +22,7 @@ struct QuizQuestionView: View {
     @State private var score: Int = 0
     @State private var showResult = false
     @State private var returnToHome = false
-
+    
     @Environment(\.dismiss) private var dismiss
     
     // Grid layout
@@ -100,9 +101,21 @@ struct QuizQuestionView: View {
                         }
                     }
                     
-                    Image(systemName: "lightbulb.circle.fill")
-                        .font(.system(size: 45, weight: .semibold))
-                        .foregroundColor(.bulbcolor)
+                    
+                    
+                    
+                    Button {
+                        
+                        if showHint == false {
+                            showHint = true
+                        }
+                        
+                    } label: {
+                        Image(systemName: "lightbulb.circle.fill")
+                            .font(.system(size: 45, weight: .semibold))
+                            .foregroundColor(.bulbcolor)
+                    }
+                    
                     
                     Button {
                         if currentQuestionIndex < questions.count - 1 {
@@ -125,9 +138,73 @@ struct QuizQuestionView: View {
                     dismiss()
                 }
             }
+            
+            
+            if showHint{
+                ZStack {
+                    // Fond flou derrière la carte
+                    Color.black.opacity(0.35)
+                        .ignoresSafeArea()
+                        .allowsHitTesting(false)
+                    
+                    VStack(spacing: 16) {
+                        
+                        // Icône
+                        Image(systemName: "lightbulb.fill")
+                            .font(.system(size: 36))
+                            .foregroundStyle(.yellow)
+                            .padding(.top, 10)
+                        
+                        // Titre
+                        Text("Indice")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        // Texte de l'indice
+                        Text(question.hint)
+                        
+                            .multilineTextAlignment(.center)
+                        
+                        
+                        // Bouton fermer
+                        Button {
+                            // action pour fermer l’indice
+                                showHint = false
+                        } label: {
+                            Text("Compris")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 44)
+                                .background(Color.blue)
+                                .cornerRadius(12)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
+                    }
+                    .padding()
+                    .frame(maxWidth: 320)
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(.ultraThinMaterial) // effet glassmorphism iOS
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 24)
+                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: .black.opacity(0.25), radius: 20, x: 0, y: 10)
+                }
+                
+            }
+            
+            
+            
         }
         .toolbar(.hidden, for: .tabBar)
+        
+        
     }
+    
     
     // Selected answer and score
     func selectAnswer(_ index: Int) {
@@ -181,7 +258,8 @@ struct QuizQuestionView: View {
                     questionTitle: "Quelle est la planète la plus proche du Soleil ?",
                     answer: "Mercure",
                     image: .mercury,
-                    propositions: ["Mercure", "Vénus", "Terre", "Mars"]
+                    propositions: ["Mercure", "Vénus", "Terre", "Mars"],
+                    hint: "Cherche la planète la plus petite et la plus rapide 🌞"
                 )
             ]
         )

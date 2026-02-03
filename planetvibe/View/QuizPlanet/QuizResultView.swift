@@ -33,7 +33,7 @@ struct QuizResultView: View {
                         .font(.title3)
                 }
                 
-                Image(.comic)
+                Image(.mascotte)
                     .resizable()
                     .scaledToFit()
                 

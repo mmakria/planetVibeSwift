@@ -26,7 +26,7 @@ struct WikiCardView : View {
                     .bold()
                     .font(.title3)
                     .background(.gradientBlue100)
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 
                 Image(article.image)
                     .shadow(radius: 3, x: 6, y: 12)

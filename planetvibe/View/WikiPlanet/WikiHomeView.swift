@@ -35,9 +35,8 @@ struct WikiHomeView: View {
                     VStack{
                         
                         // ------------ Article du jour ---------------
-                        let articleDuJour = articles[0]
                         NavigationLink {
-                            WikiDetailView(article: articleDuJour)
+                            WeeklyArticleView()
                         } label: {
                             VStack(alignment: .leading) {
                                 Text("Article du jour")

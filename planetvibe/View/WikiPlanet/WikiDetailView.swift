@@ -10,7 +10,6 @@ import SwiftUI
 struct WikiDetailView: View {
 
     var article: Article
-    @State private var appeared = false
 
     var body: some View {
         ZStack {
@@ -64,8 +63,6 @@ struct WikiDetailView: View {
                             HStack(spacing: 12) {
                                 ForEach(article.keyFacts) { fact in
                                     KeyFactCard(fact: fact)
-                                        .scaleEffect(appeared ? 1 : 0.8)
-                                        .opacity(appeared ? 1 : 0)
                                 }
                             }
                             .padding(.horizontal)
@@ -74,7 +71,7 @@ struct WikiDetailView: View {
                     }
 
                     // MARK: - Sections
-                    ForEach(Array(article.sections.enumerated()), id: \.element.id) { index, section in
+                    ForEach(article.sections) { section in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(section.title)
                                 .font(.title2)
@@ -95,12 +92,6 @@ struct WikiDetailView: View {
                         }
                         .padding(.horizontal)
                         .padding(.top, 24)
-                        .opacity(appeared ? 1 : 0)
-                        .offset(y: appeared ? 0 : 16)
-                        .animation(
-                            .easeOut(duration: 0.5).delay(Double(index) * 0.15),
-                            value: appeared
-                        )
                     }
 
                     // MARK: - Fun Fact
@@ -108,17 +99,10 @@ struct WikiDetailView: View {
                         .padding(.horizontal)
                         .padding(.top, 24)
                         .padding(.bottom, 40)
-                        .opacity(appeared ? 1 : 0)
-                        .offset(y: appeared ? 0 : 12)
                 }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            withAnimation(.easeOut(duration: 0.6)) {
-                appeared = true
-            }
-        }
     }
 }
 
