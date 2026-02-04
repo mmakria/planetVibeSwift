@@ -36,10 +36,6 @@ struct WeeklyArticleView: View {
 
                         // Title + subtitle
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(article.subtitle.uppercased())
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(Color(.secondaryBlue))
 
                             Text(article.title)
                                 .font(.largeTitle)
@@ -49,12 +45,7 @@ struct WeeklyArticleView: View {
                         .padding(.horizontal)
                         .padding(.bottom, 12)
                     }
-                    .clipShape(
-                        UnevenRoundedRectangle(
-                            bottomLeadingRadius: 24,
-                            bottomTrailingRadius: 24
-                        )
-                    )
+                   
 
                     // MARK: - Date
                     Text(article.date)
@@ -75,7 +66,6 @@ struct WeeklyArticleView: View {
                             .padding(.horizontal)
                             .padding(.top, 24)
                     }
-
                     Spacer()
                         .frame(height: 40)
                 }

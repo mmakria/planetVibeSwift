@@ -11,24 +11,19 @@ struct QuizQuestionView: View {
     
     let quiz: Quiz
     var questions: [Question] { quiz.questions }
-    @State var showHint: Bool = false
     
     @State private var currentQuestionIndex = 0
-    
-    // Store selected answers for each question
     @State private var selectedAnswers: [Int: Int] = [:]
-    
-    // Score
     @State private var score: Int = 0
     @State private var showResult = false
     @State private var returnToHome = false
+    @State private var showHint = false 
     
     @Environment(\.dismiss) private var dismiss
     
-    // Grid layout
     let columns = [
-        GridItem(.flexible(), spacing: 20),
-        GridItem(.flexible(), spacing: 20)
+        GridItem(.flexible(), spacing: 0.5),
+        GridItem(.flexible(), spacing: 0.5)
     ]
     
     var body: some View {
@@ -40,7 +35,6 @@ struct QuizQuestionView: View {
             
             VStack(spacing: 20) {
                 
-                // Progress text
                 Text("Question \(currentQuestionIndex + 1) / \(questions.count)")
                     .foregroundColor(.white.opacity(0.9))
                     .font(.headline)
@@ -51,7 +45,6 @@ struct QuizQuestionView: View {
                         .ignoresSafeArea()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
-                    // Question image
                     Image(question.image)
                         .resizable()
                         .scaledToFit()
@@ -59,15 +52,12 @@ struct QuizQuestionView: View {
                         .padding(.top, 80)
                 }
                 
-                // Question text
                 Text(question.questionTitle)
                     .foregroundColor(.white)
-                    .font(.title2)
-                    .fontWeight(.medium)
+                    .font(.system(size: 18, weight: .semibold))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
-                // Answers grid
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(question.propositions.indices, id: \.self) { index in
                         let answer = question.propositions[index]
@@ -76,10 +66,9 @@ struct QuizQuestionView: View {
                             selectAnswer(index)
                         } label: {
                             Text(answer)
-                                .font(.title3)
-                                .fontWeight(.regular)
+                                .font(.system(size: 16, weight: .regular))
                                 .foregroundColor(.white)
-                                .frame(width: 180, height: 100)
+                                .frame(width: 170, height: 100)
                                 .background(buttonColor(index: index))
                                 .cornerRadius(12)
                         }
@@ -89,33 +78,27 @@ struct QuizQuestionView: View {
                 
                 Spacer()
                 
-                // Navigation buttons
                 HStack(spacing: 5) {
                     
-                    //  Hide "Précédent" on first question
+                    // Stable layout like V2
                     if currentQuestionIndex > 0 {
                         Button {
                             currentQuestionIndex -= 1
                         } label: {
                             navButton("Précédent")
                         }
+                    } else {
+                        navButton("Précédent").opacity(0)
                     }
                     
-                    
-                    
-                    
+                    // 💡 Hint button (interactive)
                     Button {
-                        
-                        if showHint == false {
-                            showHint = true
-                        }
-                        
+                        showHint = true
                     } label: {
                         Image(systemName: "lightbulb.circle.fill")
                             .font(.system(size: 45, weight: .semibold))
                             .foregroundColor(.bulbcolor)
                     }
-                    
                     
                     Button {
                         if currentQuestionIndex < questions.count - 1 {
@@ -125,7 +108,6 @@ struct QuizQuestionView: View {
                         }
                     } label: {
                         navButton("Suivant")
-                        
                     }
                 }
                 .padding(.bottom, 30)
@@ -139,37 +121,29 @@ struct QuizQuestionView: View {
                 }
             }
             
-            
-            if showHint{
+            // ✅ HINT POPUP (from V1)
+            if showHint {
                 ZStack {
-                    // Fond flou derrière la carte
                     Color.black.opacity(0.35)
                         .ignoresSafeArea()
-                        .allowsHitTesting(false)
+                        .onTapGesture { showHint = false }
                     
                     VStack(spacing: 16) {
-                        
-                        // Icône
                         Image(systemName: "lightbulb.fill")
                             .font(.system(size: 36))
                             .foregroundStyle(.yellow)
                             .padding(.top, 10)
                         
-                        // Titre
                         Text("Indice")
                             .font(.title2)
                             .fontWeight(.bold)
                         
-                        // Texte de l'indice
                         Text(question.hint)
-                        
                             .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                         
-                        
-                        // Bouton fermer
                         Button {
-                            // action pour fermer l’indice
-                                showHint = false
+                            showHint = false
                         } label: {
                             Text("Compris")
                                 .fontWeight(.semibold)
@@ -186,7 +160,7 @@ struct QuizQuestionView: View {
                     .frame(maxWidth: 320)
                     .background(
                         RoundedRectangle(cornerRadius: 24)
-                            .fill(.ultraThinMaterial) // effet glassmorphism iOS
+                            .fill(.ultraThinMaterial)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 24)
@@ -194,22 +168,13 @@ struct QuizQuestionView: View {
                     )
                     .shadow(color: .black.opacity(0.25), radius: 20, x: 0, y: 10)
                 }
-                
             }
-            
-            
-            
         }
         .toolbar(.hidden, for: .tabBar)
-        
-        
     }
     
-    
-    // Selected answer and score
     func selectAnswer(_ index: Int) {
         guard selectedAnswers[currentQuestionIndex] == nil else { return }
-        
         selectedAnswers[currentQuestionIndex] = index
         
         let question = questions[currentQuestionIndex]
@@ -220,7 +185,6 @@ struct QuizQuestionView: View {
         }
     }
     
-    // Button color logic
     func buttonColor(index: Int) -> Color {
         guard selectedAnswers[currentQuestionIndex] != nil else {
             return .gradientBlue100
@@ -229,19 +193,14 @@ struct QuizQuestionView: View {
         let question = questions[currentQuestionIndex]
         let correctIndex = question.propositions.firstIndex(of: question.answer)
         
-        if index == correctIndex {
-            return .greenPlanet
-        } else {
-            return .redPlanet
-        }
+        return index == correctIndex ? .greenPlanet : .redPlanet
     }
     
-    // Navigation button
     func navButton(_ text: String) -> some View {
         Text(text)
             .foregroundColor(.white)
             .frame(width: 140, height: 40)
-            .background(.gradientBlue100)
+            .background(text == "Suivant" ? Color.gradientBlue400 : Color.gradientBlue300.opacity(0.5))
             .cornerRadius(8)
     }
 }

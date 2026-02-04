@@ -90,7 +90,7 @@ struct QuizHomeView: View {
                                         .overlay(alignment: .topTrailing) {
                                             if progress.isCompleted(quiz) {
                                                 Image(systemName: "checkmark.circle.fill")
-                                                    .foregroundStyle(.white)
+                                                    .foregroundStyle(.green)
                                                     .padding(6)
                                             }
                                             
@@ -149,7 +149,7 @@ struct QuizHomeView: View {
                                             
                                             if progress.isCompleted(quiz) {
                                                 Image(systemName: "checkmark.circle.fill")
-                                                    .foregroundStyle(.white)
+                                                    .foregroundStyle(.green)
                                                     .padding(6)
                                             }
                                         }

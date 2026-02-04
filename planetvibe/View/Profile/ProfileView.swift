@@ -1,8 +1,10 @@
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfileView : View {
     var body: some View {
-        
+        //        Button(action: {
+        //
+        //        },label:{
         NavigationStack{
             ZStack{
                 Color(.primaryBlue)
@@ -10,7 +12,8 @@ struct ProfileView: View {
                 
                 VStack{
                     
-                    VStack (spacing:12 ) {
+                    
+                    VStack (spacing:45) {
                         Image (.pandora)
                             .resizable()
                             .scaledToFill()
@@ -21,98 +24,132 @@ struct ProfileView: View {
                         Text("prenom et nom")
                             .font(.title2)
                             .bold()
-                        Text ("prenom et nom")
                             .foregroundColor(.white)
-                        Button("Modifier le profil")
-                        {
+                        NavigationLink("Modifier le profil") {
                             
                             
                         }
-                        HStack{
+                        
+                        
+                        
+                        VStack(alignment:.leading){
+                            
+                            
+                            
+                            Text("MES STATISTIQUES")
+                            
+                                .padding()
+                            HStack{
+                            }
+                            // MARK: premiere card
                             
                             HStack{
-                                // MARK: premiere card
-                                HStack{
+                                VStack{
+                                    
+                                    
                                     ZStack{
-                                        Rectangle()
+                                        
+                                        RoundedRectangle(cornerRadius: 12)
                                             .stroke(.blue, lineWidth: 4)
                                         
-                                            .frame(width: 96,height: 99)
+                                            .frame(width: 120,height: 160)
                                         VStack{
                                             Text("5 ")
+                                                .font(.system(size:70))
                                             Text("QUIZ")
                                             VStack{
                                                 Text("FAIS")
                                             }
+                                        }}
+                                }
+                                HStack{
+                                    
+                                    ZStack{
+                                        // MARK: deuxieme card
+                                        
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.blue, lineWidth: 4)
+                                        
+                                            .frame(width: 120,height: 160 )
+                                        VStack {
+                                            
+                                            Text("96%")
+                                                .font(.system(size:50))
+                                                .foregroundStyle(.white)
+                                            
+                                            Text("bonnes")
+                                                .foregroundStyle(.white)
+                                            
+                                            VStack{
+                                                Text("REPONSES")
+                                                    .foregroundStyle(.white)
+                                            }
                                         }
                                     }
+                                    
                                     HStack{
                                         
                                         ZStack{
-                                            // MARK: deuxieme card
+                                            // MARK: Troisieme card
                                             
-                                            Rectangle()
+                                            RoundedRectangle(cornerRadius: 12)
                                                 .stroke(.blue, lineWidth: 4)
-                                            
-                                                .frame(width: 96,height: 99 )
-                                            VStack {
-                                                
-                                                Text("96%")
-                                                    .foregroundStyle(.white)
-                                                
-                                                Text("bonnes")
-                                                    .foregroundStyle(.white)
-                                                
+                                                .frame(width: 120, height: 160)
+                                            VStack{
+                                                Text("3")
+                                                    .font(.system(size:70))
+                                                Text("Quiz" )
                                                 VStack{
-                                                    Text("REPONSES")
-                                                        .foregroundStyle(.white)
-                                                }
-                                            }
-                                        }
-                                        
-                                        HStack{
-                                            
-                                            ZStack{
-                                                // MARK: Troisieme card
-                                                
-                                                Rectangle()
-                                                    .stroke(.blue, lineWidth: 4)
-                                                    .frame(width: 96, height: 99)
-                                                VStack{
-                                                    Text("3")
-                                                    Text("Quiz" )
-                                                    VStack{
-                                                        Text ("PAR")
-                                                        Text("semaine")
-                                                    }
-                                                    
+                                                    Text ("PAR")
+                                                    Text("semaine")
                                                 }
                                                 
                                             }
+                                            
                                         }
                                     }
                                 }
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            
-                            // info
-                            
                         }
-                        Section("Informations") {
-                            Label ("jeanemail.com" , systemImage: "bell")
-                            Label("confidentialitÃ©", systemImage:"lock")
-                            Label("mode sombre" , systemImage:"moon")
-                            
-                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        
+                        // info
                         
                     }
+                    
+                    
+                    Section("Informations") {
+                        NavigationLink {
+                            
+                        } label: {
+                            
+                            Label("jeanemail.com" , systemImage: "bell")
+                        }
+                        
+                        NavigationLink{
+                            
+                        }label: {
+                            Label("confidentialitÃ©", systemImage:"lock")
+                        }
+                        NavigationLink{
+                            
+                        }label: {
+                            Label("mode sombre" , systemImage:"moon")
+                        }
+                    }
                 }
+                
             }
         }
+        
     }
 }
 
+
+
+
+//}
 
 #Preview {
     ProfileView()
