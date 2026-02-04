@@ -26,8 +26,7 @@ struct ProfileView : View {
                             .bold()
                             .foregroundColor(.white)
                         NavigationLink("Modifier le profil") {
-                            
-                            
+
                         }
                         
                         

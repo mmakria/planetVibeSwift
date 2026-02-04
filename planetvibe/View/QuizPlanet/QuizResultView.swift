@@ -153,7 +153,7 @@ struct QuizResultView: View {
 
 #Preview {
     NavigationStack {
-        QuizResultView(score: 9, quiz: quizzes[0], returnToHome: .constant(false))
+        QuizResultView(score:7, quiz: quizzes[0], returnToHome: .constant(false))
             .environmentObject(QuizProgressStore(quizzes: quizzes))
     }
 }

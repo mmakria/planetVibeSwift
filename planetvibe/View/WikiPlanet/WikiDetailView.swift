@@ -13,8 +13,9 @@ struct WikiDetailView: View {
 
     var body: some View {
         ZStack {
-            Color(.primaryBlue)
-                .ignoresSafeArea()
+           
+           Color(.primaryBlue)
+            .ignoresSafeArea()
 
             ScrollView(.vertical, showsIndicators: false) {
 
@@ -33,15 +34,22 @@ struct WikiDetailView: View {
                             startPoint: .top,
                             endPoint: .bottom
                         )
-                        .frame(height: 120)
 
                         // Title + category
                         VStack(alignment: .leading, spacing: 4) {
+                            
+                            // Category
                             Text(article.category.uppercased())
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 4)
                                 .font(.caption)
                                 .fontWeight(.semibold)
-                                .foregroundStyle(Color(.secondaryBlue))
-
+                                .foregroundStyle(.white)
+                                .background(.secondaryBlue.opacity(0.7))
+                                .cornerRadius(999)
+                            // Title
+                            
+                            
                             Text(article.title)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
@@ -56,7 +64,20 @@ struct WikiDetailView: View {
                             bottomTrailingRadius: 24
                         )
                     )
-
+                    // 140 % - 150 %+ Opacity + mots important une graisse au dessus et blanc
+                    // degradé HSL 5 points sur le L
+                    // Une bar
+                    // plus un texte est petit plus d'interlignage
+                    // plus un texte est grand moins d'interlignage - 110 % par exemple
+                    // leffet vonrestorff pricing (ux)
+                    // Ca monte ou ca va droite -> vers l'avenir, mettre en avant
+                    // structure en Z -> deux call to action converti un peu mieu
+                    // structure en T -> titre
+                    // au scroll bouton apparait en bas avec les actiopns
+                    // QUOI , quelle page ? Pourquoi faire de tell ou tell manière ?
+                    // variables figma
+                    // naming token figma
+                    
                     // MARK: - Key Facts
                     if !article.keyFacts.isEmpty {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -73,11 +94,18 @@ struct WikiDetailView: View {
                     // MARK: - Sections
                     ForEach(article.sections) { section in
                         VStack(alignment: .leading, spacing: 10) {
-                            Text(section.title)
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.white)
-
+                            
+                            HStack(alignment: .center, spacing: 12) {
+                                
+                                Rectangle()
+                                    .fill(.secondaryBlue.opacity(0.85))
+                                    .frame(width: 2.5)
+                                    .cornerRadius(2)
+                                Text(section.title)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
+                            }
                             if let sectionImage = section.image {
                                 Image(sectionImage)
                                     .resizable()
@@ -88,7 +116,10 @@ struct WikiDetailView: View {
                             }
 
                             Text(section.content)
-                                .foregroundStyle(.white.opacity(0.85))
+                                .font(.system(size: 17))
+
+                                .foregroundStyle(.white.opacity(0.80))
+                                .lineSpacing(7)
                         }
                         .padding(.horizontal)
                         .padding(.top, 24)
@@ -126,7 +157,7 @@ private struct KeyFactCard: View {
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.7))
         }
-        .frame(width: 120, height: 110)
+        .frame(width: 130, height: 120)
         .background(Color(.secondaryBlue).opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 14))
     }

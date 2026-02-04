@@ -12,8 +12,12 @@ struct WeeklyArticleView: View {
 
     var body: some View {
         ZStack {
-            Color(.primaryBlue)
-                .ignoresSafeArea()
+            LinearGradient(
+                colors: [Color(.primaryBlue), Color(.primaryBlueGradient)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
             ScrollView(.vertical, showsIndicators: false) {
 
@@ -25,6 +29,7 @@ struct WeeklyArticleView: View {
                             .resizable()
                             .scaledToFill()
                             .frame(maxWidth: .infinity, maxHeight: 250)
+                            
 
                         // Gradient overlay
                         LinearGradient(
@@ -41,6 +46,7 @@ struct WeeklyArticleView: View {
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.white)
+                            
                         }
                         .padding(.horizontal)
                         .padding(.bottom, 12)
@@ -70,8 +76,9 @@ struct WeeklyArticleView: View {
                         .frame(height: 40)
                 }
             }
+
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.inline)        
     }
 }
 
@@ -95,8 +102,11 @@ struct PhotoCardView: View {
                 .foregroundStyle(.white)
 
             Text(photo.description)
-                .font(.subheadline)
+                
                 .foregroundStyle(.white.opacity(0.85))
+                .font(.system(size: 17))
+            
+                .lineSpacing(4)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)

@@ -60,13 +60,7 @@ struct WikiEventDetailView: View {
 
 #Preview {
     WikiEventDetailView(
-        event: Event(
-            title: "Nuit des Étoiles",
-            description: "Observation des étoiles, planètes et astronomie pour tous les passionnés.",
-            date: "08/08/2026",
-            place: "Observatoire de Paris, Paris",
-            image: .nuitEtoiles
-        )
+        event: events[1]
     )
 }
 

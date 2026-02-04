@@ -26,11 +26,16 @@ struct WikiHomeView: View {
         NavigationStack{
             
             ZStack(alignment: .top) {
-                Color(.primaryBlue)
-                    .ignoresSafeArea()
+                LinearGradient(
+                    colors: [Color(.primaryBlue), Color(.primaryBlueGradient)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
                 
                 
                 // Vstack principale
+                
                 ScrollView(.vertical){
                     VStack{
                         
@@ -48,6 +53,7 @@ struct WikiHomeView: View {
                                 Text("Les plus belles photos de l'espace prises par la Nasa")
                                     .font(.subheadline)
                                     .bold()
+                                    .multilineTextAlignment(.leading)
                                 Text("24 janvier 2026")
                                     .font(.caption)
                                     .foregroundStyle(.gray)
@@ -120,7 +126,7 @@ struct WikiHomeView: View {
                         .padding(.horizontal)
                     }
                 }
-                
+          
                 
                 // SearchBar
                 VStack(alignment: .leading, spacing: 12){
