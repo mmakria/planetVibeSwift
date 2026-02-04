@@ -63,7 +63,7 @@ struct QuizResultView: View {
 
                 // MARK: - Title
                 Text(resultTitle)
-                    .font(.system(size: 34, weight: .bold))
+                    .font(.system(size: 42, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.bottom, 32)
 
@@ -71,12 +71,12 @@ struct QuizResultView: View {
                 ZStack {
                     Circle()
                         .stroke(Color.white.opacity(0.2), lineWidth: 12)
-                        .frame(width: 180, height: 180)
+                        .frame(width: 200, height: 200)
 
                     Circle()
                         .trim(from: 0, to: CGFloat(score) / 10.0)
                         .stroke(scoreColor, style: StrokeStyle(lineWidth: 12, lineCap: .round))
-                        .frame(width: 180, height: 180)
+                        .frame(width: 200, height: 200)
                         .rotationEffect(.degrees(-90))
 
                     VStack(spacing: 4) {
