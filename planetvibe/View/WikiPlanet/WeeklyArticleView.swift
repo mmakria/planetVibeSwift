@@ -78,7 +78,9 @@ struct WeeklyArticleView: View {
             }
 
         }
-        .navigationBarTitleDisplayMode(.inline)        
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .ignoresSafeArea(edges: .top)        
     }
 }
 

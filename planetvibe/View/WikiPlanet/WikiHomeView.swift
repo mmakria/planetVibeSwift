@@ -155,7 +155,7 @@ struct WikiHomeView: View {
             .foregroundStyle(.white)
             .animation(.linear, value: searchResults)
         }
-        .searchable(text: $searchText)
+        .searchable(text: $searchText, prompt: "Rechercher un article")
         .toolbarBackground(.hidden, for: .navigationBar)
         
     }
